@@ -20,7 +20,7 @@
          <image>
             <Image url="@../../../images/blank.png" />
          </image></ImageView>
-      <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="108.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="200.0" text="Attack">
+      <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>

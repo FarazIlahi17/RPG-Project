@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 
-import static com.example.rpggameproject.GameProcess.run;           //how to import stuff form other files
+
 
 public class CharacterSelectController implements Information {
 
@@ -48,28 +48,26 @@ public class CharacterSelectController implements Information {
 
     public void createKnight(ActionEvent event) throws IOException {
         Information.super.switchScene(event, "Game");
-        Knight player = new Knight();
-        run(player);
-        System.out.println("You made an knight");
+
+
+        System.out.println("You made a knight");
     }
 
     public void createTank(ActionEvent event) throws IOException {
         Information.super.switchScene(event, "Game");
         Tank player = new Tank();
-        run(player);
-        System.out.println("You made andd tank");
+
+        System.out.println("You made a tank");
     }
 
     public void createMage(ActionEvent event) throws IOException {
         Information.super.switchScene(event, "Game");
         Mage player = new Mage();
-        run(player);
-        System.out.println("You made an mage");
+
+        System.out.println("You made a mage");
     }
     public void createAssassin(ActionEvent event) throws IOException {
         Information.super.switchScene(event, "Game");
-        Assassin player = new Assassin();
-        run(player);
         System.out.println("You made an assassin");
     }
 

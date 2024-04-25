@@ -26,6 +26,10 @@ public abstract class Character{
         this.hp += (int)(1 - (current_hp / max) * .1);
     }
 
+    public void setHp(int damage){
+        this.hp -= damage;
+    }
+
 
 
 

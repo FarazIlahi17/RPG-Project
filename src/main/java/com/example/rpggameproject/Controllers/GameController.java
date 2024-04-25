@@ -1,12 +1,13 @@
 package com.example.rpggameproject.Controllers;
 
 
+import com.example.rpggameproject.GameProcess;
 import com.example.rpggameproject.Information;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class GameController implements Information {
+public class GameController implements Information, GameProcess {
     public ImageView enemy_img;
 
     public ImageView player_img;
@@ -23,7 +24,7 @@ public class GameController implements Information {
     }
 
     public void onAttackButtonClicked(){
-
+        GameProcess.super.setPlayer("Assassin");
     }
 }
 
