@@ -1,16 +1,32 @@
 package com.example.rpggameproject.Controllers;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public class GameController extends Application {
+import com.example.rpggameproject.Information;
 
-    public static void main(String[] args) {
-        launch(args);
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
+public class GameController implements Information {
+    public ImageView enemy_img;
+
+    public ImageView player_img;
+    public Button attack_btn;
+    public Button heal_btn;
+    public Button special_btn;
+
+    public void setPlayer_img(ImageView player_img) {
+        this.player_img = player_img;
     }
 
-    @Override
-    public void start(Stage primaryStage) {
+    public ImageView getPlayer_img() {
+        return player_img;
+    }
+
+    public void onAttackButtonClicked(){
 
     }
 }
+
+
+
+
