@@ -5,7 +5,7 @@ public class Mage extends Character {
     private int mana;
     private int mana_consume;
     private int special_attack;
-    Mage(){
+    public  Mage(){
         this.name = "Mage";
         this.hp = 85;
         this.max_hp = 85;

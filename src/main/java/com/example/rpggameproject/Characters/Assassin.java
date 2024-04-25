@@ -4,7 +4,7 @@ public class Assassin extends Character {
 
     private int crit_chance;
 
-     Assassin(){
+     public  Assassin(){
          this.name = "Assassin";
          this.hp = 101;
          this.max_hp = 101;

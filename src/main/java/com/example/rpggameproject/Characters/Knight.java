@@ -5,7 +5,7 @@ public class Knight extends Character {
     private int charge_bar;
 
     private int special_attack;
-    Knight(){
+    public Knight(){
         this.name = "Knight";
         this.hp = 137;
         this.max_hp = 137;

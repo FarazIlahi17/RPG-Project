@@ -3,7 +3,7 @@ package com.example.rpggameproject.Characters;
 public class Tank extends Character {
 
     private int block_chance;
-    Tank(){
+    public Tank(){
         this.name = "Tank";
         this.hp = 192;
         this.max_hp = 192;

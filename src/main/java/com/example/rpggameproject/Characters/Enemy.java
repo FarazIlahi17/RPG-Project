@@ -1,7 +1,7 @@
 package com.example.rpggameproject.Characters;
 
 public class Enemy extends Character {
-    Enemy(){
+    public Enemy(){
         this.name = "EnemyDude";
         this.hp = 150;
         this.max_hp = 150;

@@ -27,10 +27,10 @@
             <Image url="@../../../images/assassin.png" />
          </image>
       </ImageView>
-      <Button fx:id="knight_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Knight" />
-      <Button fx:id="tank_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Tank" />
-      <Button fx:id="mage_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Mage" />
-      <Button fx:id="assassin_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Assassin" />
+      <Button fx:id="knight_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="600.0" mnemonicParsing="false" onAction="#createKnight" onMouseClicked="#createKnight" prefHeight="75.0" prefWidth="200.0" text="Knight" />
+      <Button fx:id="tank_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="600.0" mnemonicParsing="false" onAction="#createTank" onMouseClicked="#createTank" prefHeight="75.0" prefWidth="200.0" text="Tank" />
+      <Button fx:id="mage_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="600.0" mnemonicParsing="false" onAction="#createMage" onMouseClicked="#createMage" prefHeight="75.0" prefWidth="200.0" text="Mage" />
+      <Button fx:id="assassin_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="600.0" mnemonicParsing="false" onAction="#createAssassin" prefHeight="75.0" prefWidth="200.0" text="Assassin" />
 
    </children>
 </AnchorPane>
