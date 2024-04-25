@@ -3,6 +3,7 @@ package com.example.rpggameproject.Controllers;
 import com.example.rpggameproject.Information;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -18,14 +19,21 @@ public class CharacterSelectController implements Information {
     @FXML
     ImageView mage;
 
-    Image knight_img = new Image("knight.png");
+    @FXML
+    Button knight_btn;
+    @FXML
+    Button tank_btn;
+    @FXML
+    Button mage_btn;
+    @FXML
+    Button assassin_btn;
+
+
+
 
 
     public void switchToGameScene(ActionEvent event) throws IOException {
         Information.super.switchScene(event, "Game");
-    }
-    public void uploadAssets(ActionEvent event) throws IOException{
-        knight.setImage(knight_img);
     }
 
 }

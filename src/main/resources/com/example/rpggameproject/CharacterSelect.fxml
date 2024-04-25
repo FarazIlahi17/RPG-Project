@@ -7,25 +7,30 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.CharacterSelectController">
    <children>
-      <Button fx:id="knight_btn" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToGameScene" text="Knight" />
-      <Button alignment="CENTER_RIGHT" layoutX="500.0" layoutY="400.0" mnemonicParsing="false" text="Mage" />
-      <Button alignment="CENTER_RIGHT" layoutX="700.0" layoutY="400.0" mnemonicParsing="false" text="Assassin" />
-      <Button alignment="CENTER_RIGHT" layoutX="300.0" layoutY="400.0" mnemonicParsing="false" text="Tank" />
-      <ImageView fx:id="knight" fitHeight="150.0" fitWidth="200.0" layoutX="27.0" layoutY="182.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="knight.png"/>
+      <ImageView fitHeight="350.0" fitWidth="500.0" layoutX="25.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/knight.png" />
+         </image>
       </ImageView>
-      <ImageView fx:id="assassin" fitHeight="159.0" fitWidth="200.0" layoutX="646.0" layoutY="203.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="assassin.png"/>
+      <ImageView fitHeight="350.0" fitWidth="500.0" layoutX="425.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/tank.png" />
+         </image>
       </ImageView>
-      <ImageView fx:id="mage" fitHeight="150.0" fitWidth="200.0" layoutX="448.0" layoutY="200.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="mage.png"/>
+      <ImageView fitHeight="350.0" fitWidth="500.0" layoutX="825.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/mage.png" />
+         </image>
       </ImageView>
-      <ImageView fx:id="tank" fitHeight="150.0" fitWidth="200.0" layoutX="246.0" layoutY="192.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="tank.png"/>
+      <ImageView fitHeight="350.0" fitWidth="500.0" layoutX="1217.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/assassin.png" />
+         </image>
       </ImageView>
+      <Button fx:id="knight_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Knight" />
+      <Button fx:id="tank_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Tank" />
+      <Button fx:id="mage_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Mage" />
+      <Button fx:id="assassin_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="75.0" prefWidth="200.0" text="Assassin" />
+
    </children>
 </AnchorPane>
