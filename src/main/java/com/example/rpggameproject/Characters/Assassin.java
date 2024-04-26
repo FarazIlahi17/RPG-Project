@@ -16,6 +16,10 @@ public class Assassin extends Character {
         return this.basic_attack;
     }
 
+    public int getCrit_chance(){
+         return this.crit_chance;
+    }
+
 
     public void updateBar() {
         this.crit_chance += 19;

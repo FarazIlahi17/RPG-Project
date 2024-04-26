@@ -3,6 +3,7 @@ package com.example.rpggameproject.Characters;
 public abstract class Character{
     protected String name;
     protected int hp;
+    protected boolean isTurn = true;
 
     protected int max_hp;
     protected int basic_attack;
@@ -20,14 +21,23 @@ public abstract class Character{
 
     public abstract void updateBar();
 
-    public void heal(){
+    public void setheal(){
         double current_hp = this.hp;
         double max = this.max_hp;
-        this.hp += (int)(1 - (current_hp / max) * .1);
+        this.hp += (int)((1 - (current_hp / max)) * 10);
     }
 
-    public void setHp(int damage){
+    public void takeDamage(int damage){
         this.hp -= damage;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+
+    public void setTurn(){
+        isTurn = false;
     }
 
 

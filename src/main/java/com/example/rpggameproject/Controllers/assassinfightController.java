@@ -2,11 +2,10 @@ package com.example.rpggameproject.Controllers;
 
 
 import com.example.rpggameproject.GameProcess;
-
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class GameController implements GameProcess {
+public class assassinfightController implements GameProcess {
     public ImageView enemy_img;
 
     public ImageView player_img;
@@ -23,7 +22,10 @@ public class GameController implements GameProcess {
     }
 
     public void onAttackButtonClicked(){
-
+        assassinBasicAttack();
+    }
+    public void onHealButtonClicked(){
+        heal();
     }
 }
 
