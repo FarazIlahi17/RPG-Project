@@ -1,12 +1,12 @@
 package com.example.rpggameproject.Controllers;
 
 
-import com.example.rpggameproject.GameProcess;
+import com.example.rpggameproject.AssassinGameProcess;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class GameController implements GameProcess {
+public class GameController implements AssassinGameProcess {
     public ImageView enemy_img;
 
     public ImageView player_img;

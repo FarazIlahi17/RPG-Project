@@ -11,12 +11,18 @@ public class Knight extends Character {
         this.max_hp = 137;
         this.basic_attack = 13;
         this.charge_bar = 0;
-        this.special_attack = 38;
+        this.special_attack = 50;
 
     }
     public int getBasic_attack(){
         return this.basic_attack;
+    }
+    public int getCharge_bar(){
+        return this.charge_bar;
+    }
 
+    public boolean getIsCharged(){
+        return this.charge_bar >= 100;
     }
 
     public int getSpecial_attack(){
@@ -24,7 +30,9 @@ public class Knight extends Character {
     }
 
     public void updateBar(){
-        this.charge_bar += 20;
+        if(this.charge_bar < 100) {
+            this.charge_bar += 20;
+        }
     }
 
     public void resetBar(){

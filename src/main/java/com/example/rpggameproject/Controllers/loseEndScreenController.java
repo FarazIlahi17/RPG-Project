@@ -1,15 +1,12 @@
 package com.example.rpggameproject.Controllers;
 
-import com.example.rpggameproject.GameProcess;
+import com.example.rpggameproject.AssassinGameProcess;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loseEndScreenController implements GameProcess {
+public class loseEndScreenController implements AssassinGameProcess {
 
     public Button endGame_btn;
 

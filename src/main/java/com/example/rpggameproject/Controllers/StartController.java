@@ -1,6 +1,6 @@
 package com.example.rpggameproject.Controllers;
 
-import com.example.rpggameproject.GameProcess;
+import com.example.rpggameproject.AssassinGameProcess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StartController implements GameProcess {
+public class StartController implements AssassinGameProcess {
 
     private Stage stage;
 

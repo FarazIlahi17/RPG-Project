@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.assassinfightController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.tankfightController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1600.0" layoutX="-15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" scaleX="1.44">
          <image>
@@ -18,9 +18,9 @@
       <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1101.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/enemy.png" />
       </ImageView>
-      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="65.0" layoutY="511.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/assassin.png" />
+            <Image url="@../../../images/tank.png" />
          </image></ImageView>
       <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack">
          <font>
@@ -34,11 +34,6 @@
       </Button>
       <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="221.0" layoutY="391.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" />
       <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1312.0" layoutY="283.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" />
-      <Label fx:id="crit_label" layoutX="1343.0" layoutY="175.0" opacity="0.0" prefHeight="91.0" prefWidth="96.0" text="Crit" textFill="#00ff28">
-         <font>
-            <Font size="56.0" />
-         </font>
-      </Label>
       <Label fx:id="enemyHeal_label" layoutX="1313.0" layoutY="185.0" opacity="0.0" prefHeight="91.0" prefWidth="136.0" text="Heal" textFill="#ff6b00">
          <font>
             <Font size="56.0" />
@@ -49,5 +44,10 @@
             <Font size="56.0" />
          </font>
       </Label>
+      <ImageView fx:id="bullet" fitHeight="200.0" fitWidth="212.0" layoutX="400.0" layoutY="500.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/bullet.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

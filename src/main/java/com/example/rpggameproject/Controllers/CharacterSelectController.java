@@ -1,7 +1,6 @@
 package com.example.rpggameproject.Controllers;
 
-import com.example.rpggameproject.Characters.Assassin;
-import com.example.rpggameproject.GameProcess;
+import com.example.rpggameproject.AssassinGameProcess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 
 
-public class CharacterSelectController implements GameProcess {
+public class CharacterSelectController implements AssassinGameProcess {
 
 
     @FXML
@@ -41,12 +40,12 @@ public class CharacterSelectController implements GameProcess {
 
 
     public void createKnight(ActionEvent event) throws IOException {
-        switchScene(event, "Game");
+        switchScene(event, "knightfight");
 
     }
 
     public void createTank(ActionEvent event) throws IOException {
-        switchScene(event, "Game");
+        switchScene(event, "tankfight");
 
 
     }

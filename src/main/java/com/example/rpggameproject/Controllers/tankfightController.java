@@ -2,6 +2,7 @@ package com.example.rpggameproject.Controllers;
 
 
 import com.example.rpggameproject.AssassinGameProcess;
+import com.example.rpggameproject.TankGameProcess;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,16 +12,14 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
-import static java.lang.Thread.sleep;
-
-public class assassinfightController implements AssassinGameProcess {
+public class tankfightController implements TankGameProcess {
     public ImageView enemy_img;
     public ImageView player_img;
+    public ImageView bullet;
     public Button attack_btn;
     public Button heal_btn;
     public ProgressBar hpBar;
     public ProgressBar enemyhpBar;
-    public Label crit_label;
     public Label playerHeal_label;
     public Label enemyHeal_label;
 
@@ -35,12 +34,11 @@ public class assassinfightController implements AssassinGameProcess {
                     throw new RuntimeException(e);
                 }
                 switch(fcn) {
-                    case "setPlayerImage":
-                        player_img.setLayoutX(100);
-                        hpBar.setOpacity(1);
+                    case "setEnemyHpBar":
+                        enemyhpBar.setProgress(setEnemyhpBar());
                         break;
-                    case "fixCritLabel":
-                        crit_label.setOpacity(0);
+                    case "setBulletImage":
+                        bullet.setOpacity(0);
                         break;
                     case "fixHeal":
                         playerHeal_label.setOpacity(0);
@@ -73,28 +71,23 @@ public class assassinfightController implements AssassinGameProcess {
     }
 
     public void onAttackButtonClicked(ActionEvent event) throws IOException {
+        bullet.setOpacity(1);
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
-        player_img.setLayoutX(1000);
-        hpBar.setOpacity(0);
         basicAttack();
-        if(isCrit()){
-            crit_label.setOpacity(1);
-            delay(1,"fixCritLabel");
-            resetisCrit();
-        }
-        enemyhpBar.setProgress(setEnemyhpBar());
+        delay(1,"bulletAnimation");
+        delay(2,"setEnemyHpBar");
         runEnemyTurn();
-        delay(1,"setPlayerImage");
+        delay(2,"setBulletImage");
         if(enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
+            delay(3, "doEnemyAttack");
+            delay(4, "setEnemyImage");
         }
         else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
+            delay(3,"doEnemyHeal");
+            delay(4,"fixEnemyHeal");
         }
-        if(isAssassinDead()){
+        if(isTankDead()){
             switchScene(event,"loseEndScreen");
         }
         if(isEnemyDead()){
@@ -119,7 +112,7 @@ public class assassinfightController implements AssassinGameProcess {
             delay(2,"doEnemyHeal");
             delay(3,"fixEnemyHeal");
         }
-        if(isAssassinDead()){
+        if(isTankDead()){
             switchScene(event,"loseEndScreen");
         }
     }

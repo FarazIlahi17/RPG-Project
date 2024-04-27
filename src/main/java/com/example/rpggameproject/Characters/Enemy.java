@@ -8,7 +8,6 @@ public class Enemy extends Character {
         this.max_hp = 150;
         this.basic_attack = 25;
         this.isAttacking = true;
-
     }
 
     public int getBasic_attack(){

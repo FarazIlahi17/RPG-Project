@@ -30,7 +30,7 @@
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
       </Button>
-      <Button fx:id="special_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="1026.0" layoutY="108.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="200.0" text="Special">
+      <Button fx:id="pecial_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="1026.0" layoutY="108.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="200.0" text="Special">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>

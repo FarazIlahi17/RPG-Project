@@ -5,9 +5,9 @@ public class Tank extends Character {
     private int block_chance;
     public Tank(){
         this.name = "Tank";
-        this.hp = 192;
-        this.max_hp = 192;
-        this.basic_attack = 7;
+        this.hp = 252;
+        this.max_hp = 252;
+        this.basic_attack = 30;
         this.block_chance = 0;
 
     }
