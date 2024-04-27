@@ -3,6 +3,7 @@ package com.example.rpggameproject.Characters;
 public class Assassin extends Character {
 
     private int crit_chance;
+    private boolean isCrit;
 
      public  Assassin(){
          this.name = "Assassin";
@@ -10,6 +11,7 @@ public class Assassin extends Character {
          this.max_hp = 101;
          this.basic_attack = 15;
          this.crit_chance = 0;
+         this.isCrit = false;
      }
 
     public int getBasic_attack(){
@@ -20,6 +22,12 @@ public class Assassin extends Character {
          return this.crit_chance;
     }
 
+    public boolean getisCrit() {
+        return isCrit;
+    }
+    public void setisCrit(boolean b){
+         this.isCrit = b;
+    }
 
     public void updateBar() {
         this.crit_chance += 19;

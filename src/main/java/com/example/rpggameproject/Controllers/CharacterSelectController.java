@@ -58,7 +58,6 @@ public class CharacterSelectController implements GameProcess {
     }
     public void createAssassin(ActionEvent event) throws IOException {
        switchScene(event, "assassinfight");
-       GameProcess.super.setAssassin();
     }
 
 }
