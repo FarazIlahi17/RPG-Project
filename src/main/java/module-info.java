@@ -9,4 +9,6 @@ module com.example.rpggameproject {
     opens com.example.rpggameproject.Controllers to javafx.fxml;
     exports com.example.rpggameproject.Characters;
     opens com.example.rpggameproject.Characters to javafx.fxml;
+    exports com.example.rpggameproject.Controllers.FightControllers;
+    opens com.example.rpggameproject.Controllers.FightControllers to javafx.fxml;
 }

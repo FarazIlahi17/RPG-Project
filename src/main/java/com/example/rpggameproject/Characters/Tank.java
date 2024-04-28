@@ -23,6 +23,9 @@ public class Tank extends Character {
     public void resetBar(){
         this.block_chance = 0;
     }
+    public int getBlock_chance(){
+        return this.block_chance;
+    }
 
 
 

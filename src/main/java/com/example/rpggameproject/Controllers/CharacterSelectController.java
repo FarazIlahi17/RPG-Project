@@ -41,19 +41,14 @@ public class CharacterSelectController implements AssassinGameProcess {
 
     public void createKnight(ActionEvent event) throws IOException {
         switchScene(event, "knightfight");
-
     }
 
     public void createTank(ActionEvent event) throws IOException {
         switchScene(event, "tankfight");
-
-
     }
 
     public void createMage(ActionEvent event) throws IOException {
         switchScene(event, "magefight");
-
-
     }
     public void createAssassin(ActionEvent event) throws IOException {
        switchScene(event, "assassinfight");

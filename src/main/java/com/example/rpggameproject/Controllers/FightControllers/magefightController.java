@@ -1,4 +1,4 @@
-package com.example.rpggameproject.Controllers;
+package com.example.rpggameproject.Controllers.FightControllers;
 
 
 import com.example.rpggameproject.MageGameProcess;
@@ -31,11 +31,23 @@ public class magefightController implements MageGameProcess {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                try {
-                    long milles = (long)(fraction * 1000);
-                    Thread.sleep(milles);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                if (!fcn.equals("fireBallAnimation")){
+                    try {
+                        long milles = (long)(fraction * 1000);
+                        Thread.sleep(milles);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    for(int i = 300; i <= 1200; i++){
+                        fireball.setLayoutX(i);
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
                 switch (fcn) {
                     case "fireBallAnimation1":
@@ -95,24 +107,25 @@ public class magefightController implements MageGameProcess {
         });
     }
     public void doEnemyAttack(){
+        runEnemyTurn();
         if (enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
+            delay(3, "doEnemyAttack");
+            delay(4, "setEnemyImage");
             if (canSpecialAttack()){
-                delay(3, "setSpecialAttackbutton");
+                delay(4, "setSpecialAttackbutton");
             }
             else if (canBasicAttack()){
-                delay(3, "setBasicAttackbutton");
+                delay(4, "setBasicAttackbutton");
             }
         }
         else {
-            delay(2, "doEnemyHeal");
-            delay(3, "fixEnemyHeal");
+            delay(3, "doEnemyHeal");
+            delay(4, "fixEnemyHeal");
             if (canSpecialAttack()){
-                delay(3, "setSpecialAttackbutton");
+                delay(4, "setSpecialAttackbutton");
             }
             else if (canBasicAttack()){
-                delay(3, "setBasicAttackbutton");
+                delay(4, "setBasicAttackbutton");
             }
         }
     }
@@ -125,12 +138,9 @@ public class magefightController implements MageGameProcess {
         fireball.setLayoutX(400);
         basicAttack();
         manaBar.setProgress(setManaBar());
-        delay(.2,"fireBallAnimation1");
-        delay(.5,"fireBallAnimation2");
-        delay(.9,"fireBallAnimation3");
-        delay(1,"setEnemyHpBar");
-        runEnemyTurn();
-        delay(1,"setFireballImg");
+        delay(1.8, "fireBallAnimation");
+        delay(1.8,"setEnemyHpBar");
+        delay(1.8,"setFireballImg");
         doEnemyAttack();
         if (isEnemyDead()) {
             switchScene(event, "winEndScreen");
@@ -149,7 +159,6 @@ public class magefightController implements MageGameProcess {
         manaBar.setProgress(setManaBar());
         playerHeal_label.setOpacity(1);
         delay(1, "fixHeal");
-        runEnemyTurn();
         doEnemyAttack();
         if (isMageDead()) {
             switchScene(event, "loseEndScreen");
@@ -165,7 +174,6 @@ public class magefightController implements MageGameProcess {
         manaBar.setProgress(setManaBar());
         delay(1,"laserAnimation");
         delay(1,"setEnemyHpBar");
-        runEnemyTurn();
         doEnemyAttack();
         if (isEnemyDead()) {
             switchScene(event, "winEndScreen");

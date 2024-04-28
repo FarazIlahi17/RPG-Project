@@ -35,7 +35,6 @@ public interface TankGameProcess {
     }
     default void runEnemyTurn(){
         if((int)(Math.random() * 11) <= 7){
-            tank.takeDamage(enemy.getBasic_attack());
             enemy.setAttacking(true);
         }
         else {
@@ -43,11 +42,22 @@ public interface TankGameProcess {
             enemy.setAttacking(false);
         }
     }
+    default void runEnemyDamage(){
+        tank.takeDamage(enemy.getBasic_attack());
+    }
 
 
     default void basicAttack(){
         enemy.takeDamage(tank.getBasic_attack());
         tank.updateBar();
+    }
+    default boolean isBlocked(){
+        if((int)(Math.random() * 101) <= tank.getBlock_chance()){
+            tank.resetBar();
+            return true;
+
+        }
+        return false;
     }
     default void heal(){
         tank.setheal();

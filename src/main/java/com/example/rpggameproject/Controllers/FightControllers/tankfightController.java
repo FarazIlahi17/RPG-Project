@@ -1,7 +1,5 @@
-package com.example.rpggameproject.Controllers;
+package com.example.rpggameproject.Controllers.FightControllers;
 
-
-import com.example.rpggameproject.AssassinGameProcess;
 import com.example.rpggameproject.TankGameProcess;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -16,6 +14,7 @@ public class tankfightController implements TankGameProcess {
     public ImageView enemy_img;
     public ImageView player_img;
     public ImageView bullet;
+    public ImageView shield;
     public Button attack_btn;
     public Button heal_btn;
     public ProgressBar hpBar;
@@ -28,22 +27,25 @@ public class tankfightController implements TankGameProcess {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                try {
-                    long milles = (long) (fractions * 1000);
-                    Thread.sleep(milles);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                if(!fcn.equals("bulletAnimation")){
+                    try {
+                        long milles = (long) (fractions * 1000);
+                        Thread.sleep(milles);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    for(int i = 350; i <= 1200; i++){
+                        bullet.setLayoutX(i);
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
                 switch(fcn) {
-                    case "bulletAnimation1":
-                        bullet.setLayoutX(600);
-                        break;
-                    case "bulletAnimation2":
-                        bullet.setLayoutX(900);
-                        break;
-                    case "bulletAnimation3":
-                        bullet.setLayoutX(1200);
-                        break;
                     case "setEnemyHpBar":
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
@@ -73,6 +75,18 @@ public class tankfightController implements TankGameProcess {
                         enemyHeal_label.setOpacity(1);
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
+                    case "resetBlock":
+                        enemy_img.setLayoutX(1100);
+                        shield.setOpacity(0);
+                        attack_btn.setLayoutX(350);
+                        heal_btn.setLayoutX(900);
+                        enemyhpBar.setOpacity(1);
+                        break;
+                    case "block":
+                        shield.setOpacity(1);
+                        enemy_img.setLayoutX(700);
+                        enemyhpBar.setOpacity(0);
+                        break;
                     case "doNothing":
                         break;
                 }
@@ -80,32 +94,43 @@ public class tankfightController implements TankGameProcess {
         });
     }
 
+    public void doEnemyAttack(){
+        runEnemyTurn();
+        if(enemyisAttacking()) {
+            if(isBlocked()){
+                delay(3,"block");
+                delay(4,"resetBlock");
+            }
+            else {
+                runEnemyDamage();
+                delay(3, "doEnemyAttack");
+                delay(4, "setEnemyImage");
+            }
+
+        }
+        else {
+            delay(3,"doEnemyHeal");
+            delay(4,"fixEnemyHeal");
+        }
+    }
+
     public void onAttackButtonClicked(ActionEvent event) throws IOException {
         bullet.setOpacity(1);
-        bullet.setLayoutX(400);
+        bullet.setLayoutX(350);
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         basicAttack();
-        delay(.2,"bulletAnimation1");
-        delay(.5,"bulletAnimation2");
-        delay(.9,"bulletAnimation3");
-        delay(1,"setEnemyHpBar");
-        runEnemyTurn();
-        delay(1,"setBulletImage");
-        if(enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-        }
-        else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
+        delay(1,"bulletAnimation");
+        delay(1.7,"setEnemyHpBar");
+        delay(1.7,"setBulletImage");
+        doEnemyAttack();
+        if(isEnemyDead()){
+            switchScene(event,"winEndScreen");
         }
         if(isTankDead()){
             switchScene(event,"loseEndScreen");
         }
-        if(isEnemyDead()){
-            switchScene(event,"winEndScreen");
-        }
+
     }
 
     public void onHealButtonClicked(ActionEvent event) throws IOException {
@@ -115,16 +140,7 @@ public class tankfightController implements TankGameProcess {
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
         delay(1,"fixHeal");
-        runEnemyTurn();
-        if(enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-
-        }
-        else {
-            delay(3,"doEnemyHeal");
-            delay(4,"fixEnemyHeal");
-        }
+        doEnemyAttack();
         if(isTankDead()){
             switchScene(event,"loseEndScreen");
         }

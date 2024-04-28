@@ -1,4 +1,4 @@
-package com.example.rpggameproject.Controllers;
+package com.example.rpggameproject.Controllers.FightControllers;
 
 
 import com.example.rpggameproject.AssassinGameProcess;
@@ -71,6 +71,17 @@ public class assassinfightController implements AssassinGameProcess {
             }
         });
     }
+    public void doEnemyAttack(){
+        runEnemyTurn();
+        if(enemyisAttacking()) {
+            delay(2, "doEnemyAttack");
+            delay(3, "setEnemyImage");
+        }
+        else {
+            delay(2,"doEnemyHeal");
+            delay(3,"fixEnemyHeal");
+        }
+    }
 
     public void onAttackButtonClicked(ActionEvent event) throws IOException {
         attack_btn.setLayoutX(10000);
@@ -84,21 +95,13 @@ public class assassinfightController implements AssassinGameProcess {
             resetisCrit();
         }
         enemyhpBar.setProgress(setEnemyhpBar());
-        runEnemyTurn();
         delay(1,"setPlayerImage");
-        if(enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-        }
-        else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
+        doEnemyAttack();
+        if(isEnemyDead()){
+            switchScene(event,"winEndScreen");
         }
         if(isAssassinDead()){
             switchScene(event,"loseEndScreen");
-        }
-        if(isEnemyDead()){
-            switchScene(event,"winEndScreen");
         }
     }
 
@@ -109,16 +112,7 @@ public class assassinfightController implements AssassinGameProcess {
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
         delay(1,"fixHeal");
-        runEnemyTurn();
-        if(enemyisAttacking()) {
-            delay(1, "doEnemyAttack");
-            delay(2, "setEnemyImage");
-
-        }
-        else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
-        }
+        doEnemyAttack();
         if(isAssassinDead()){
             switchScene(event,"loseEndScreen");
         }

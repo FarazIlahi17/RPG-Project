@@ -1,4 +1,4 @@
-package com.example.rpggameproject.Controllers;
+package com.example.rpggameproject.Controllers.FightControllers;
 
 
 import com.example.rpggameproject.AssassinGameProcess;
@@ -80,47 +80,7 @@ public class knightfightController implements KnightGameProcess {
         });
     }
 
-    public void onAttackButtonClicked(ActionEvent event) throws IOException {
-        attack_btn.setLayoutX(10000);
-        heal_btn.setLayoutX(10000);
-        special_btn.setLayoutX(10000);
-        player_img.setLayoutX(1000);
-        hpBar.setOpacity(0);
-        chargebar.setOpacity(0);
-        basicAttack();
-        enemyhpBar.setProgress(setEnemyhpBar());
-        delay(1, "setPlayerImage");
-        runEnemyTurn();
-        if (enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-            if (getIsCharged()) {
-                delay(3, "setSpecialButton");
-            }
-        } else {
-            delay(2, "doEnemyHeal");
-            delay(3, "fixEnemyHeal");
-            if (getIsCharged()) {
-                delay(3, "setSpecialButton");
-            }
-        }
-        if (isKnightDead()) {
-            switchScene(event, "loseEndScreen");
-        }
-        if (isEnemyDead()) {
-            switchScene(event, "winEndScreen");
-        }
-    }
-
-    public void onHealButtonClicked(ActionEvent event) throws IOException {
-        attack_btn.setLayoutX(10000);
-        heal_btn.setLayoutX(10000);
-        special_btn.setLayoutX(10000);
-        heal();
-        hpBar.setProgress(sethpBar());
-        chargebar.setProgress(setChargeBar());
-        playerHeal_label.setOpacity(1);
-        delay(1, "fixHeal");
+    public void doEnemyAttack(){
         runEnemyTurn();
         if (enemyisAttacking()) {
             delay(2, "doEnemyAttack");
@@ -136,6 +96,37 @@ public class knightfightController implements KnightGameProcess {
                 delay(3, "setSpecialButton");
             }
         }
+    }
+
+    public void onAttackButtonClicked(ActionEvent event) throws IOException {
+        attack_btn.setLayoutX(10000);
+        heal_btn.setLayoutX(10000);
+        special_btn.setLayoutX(10000);
+        player_img.setLayoutX(1000);
+        hpBar.setOpacity(0);
+        chargebar.setOpacity(0);
+        basicAttack();
+        enemyhpBar.setProgress(setEnemyhpBar());
+        delay(1, "setPlayerImage");
+        doEnemyAttack();
+        if (isEnemyDead()) {
+            switchScene(event, "winEndScreen");
+        }
+        if (isKnightDead()) {
+            switchScene(event, "loseEndScreen");
+        }
+    }
+
+    public void onHealButtonClicked(ActionEvent event) throws IOException {
+        attack_btn.setLayoutX(10000);
+        heal_btn.setLayoutX(10000);
+        special_btn.setLayoutX(10000);
+        heal();
+        hpBar.setProgress(sethpBar());
+        chargebar.setProgress(setChargeBar());
+        playerHeal_label.setOpacity(1);
+        delay(1, "fixHeal");
+        doEnemyAttack();
         if (isKnightDead()) {
             switchScene(event, "loseEndScreen");
         }
@@ -153,20 +144,12 @@ public class knightfightController implements KnightGameProcess {
         delay(1,"fixSpecial_Label");
         enemyhpBar.setProgress(setEnemyhpBar());
         delay(1, "setPlayerImage");
-        runEnemyTurn();
-        if (enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-        }
-        else {
-            delay(2, "doEnemyHeal");
-            delay(3, "fixEnemyHeal");
+        doEnemyAttack();
+        if (isEnemyDead()) {
+            switchScene(event, "winEndScreen");
         }
         if (isKnightDead()) {
             switchScene(event, "loseEndScreen");
-        }
-        if (isEnemyDead()) {
-            switchScene(event, "winEndScreen");
         }
     }
 }
