@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public interface AssassinGameProcess {
                                             //method to switch scene based on given parameter
-    public default void switchScene(ActionEvent event, String new_scene) throws IOException {
+    default void switchScene(ActionEvent event, String new_scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(new_scene + ".fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1600, 800);
@@ -46,7 +46,7 @@ public interface AssassinGameProcess {
 
     default void basicAttack(){
         if((int)(Math.random() * 101) <= assassin.getCrit_chance()){
-            enemy.takeDamage((int)(assassin.getBasic_attack() * 2.2));
+            enemy.takeDamage((int)(assassin.getBasic_attack() * 5));
             assassin.resetBar();                                                 //all methods for assassin functions
             assassin.setisCrit(true);
         }
@@ -64,6 +64,9 @@ public interface AssassinGameProcess {
     default void heal(){
         assassin.setheal();
         assassin.updateBar();
+        if(assassin.getHp() > assassin.getMax_hp()){
+            assassin.resetHp();
+        }
     }
     default double sethpBar(){
         return 1 - (assassin.getHp() / (double)assassin.getMax_hp());

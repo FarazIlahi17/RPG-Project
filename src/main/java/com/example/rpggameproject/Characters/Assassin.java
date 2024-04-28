@@ -7,9 +7,9 @@ public class Assassin extends Character {
 
      public  Assassin(){
          this.name = "Assassin";
-         this.hp = 101;
-         this.max_hp = 101;
-         this.basic_attack = 15;
+         this.hp = 123;
+         this.max_hp = this.hp;
+         this.basic_attack = 20;
          this.crit_chance = 0;
          this.isCrit = false;
      }

@@ -24,16 +24,26 @@ public class tankfightController implements TankGameProcess {
     public Label enemyHeal_label;
 
 
-    public void delay(long seconds, String fcn){
+    public void delay(double fractions, String fcn){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(seconds * 1000);
+                    long milles = (long) (fractions * 1000);
+                    Thread.sleep(milles);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
                 switch(fcn) {
+                    case "bulletAnimation1":
+                        bullet.setLayoutX(600);
+                        break;
+                    case "bulletAnimation2":
+                        bullet.setLayoutX(900);
+                        break;
+                    case "bulletAnimation3":
+                        bullet.setLayoutX(1200);
+                        break;
                     case "setEnemyHpBar":
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
@@ -72,20 +82,23 @@ public class tankfightController implements TankGameProcess {
 
     public void onAttackButtonClicked(ActionEvent event) throws IOException {
         bullet.setOpacity(1);
+        bullet.setLayoutX(400);
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         basicAttack();
-        delay(1,"bulletAnimation");
-        delay(2,"setEnemyHpBar");
+        delay(.2,"bulletAnimation1");
+        delay(.5,"bulletAnimation2");
+        delay(.9,"bulletAnimation3");
+        delay(1,"setEnemyHpBar");
         runEnemyTurn();
-        delay(2,"setBulletImage");
+        delay(1,"setBulletImage");
         if(enemyisAttacking()) {
-            delay(3, "doEnemyAttack");
-            delay(4, "setEnemyImage");
+            delay(2, "doEnemyAttack");
+            delay(3, "setEnemyImage");
         }
         else {
-            delay(3,"doEnemyHeal");
-            delay(4,"fixEnemyHeal");
+            delay(2,"doEnemyHeal");
+            delay(3,"fixEnemyHeal");
         }
         if(isTankDead()){
             switchScene(event,"loseEndScreen");
@@ -104,13 +117,13 @@ public class tankfightController implements TankGameProcess {
         delay(1,"fixHeal");
         runEnemyTurn();
         if(enemyisAttacking()) {
-            delay(1, "doEnemyAttack");
-            delay(2, "setEnemyImage");
+            delay(2, "doEnemyAttack");
+            delay(3, "setEnemyImage");
 
         }
         else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
+            delay(3,"doEnemyHeal");
+            delay(4,"fixEnemyHeal");
         }
         if(isTankDead()){
             switchScene(event,"loseEndScreen");

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.knightfightController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.magefightController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1600.0" layoutX="-15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" scaleX="1.44">
          <image>
@@ -18,9 +18,9 @@
       <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1101.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/General Assets/enemy.png" />
       </ImageView>
-      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="101.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/Knight Assets/knight.png" />
+            <Image url="@../../../images/Mage Assets/mage.png" />
          </image></ImageView>
       <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack">
          <font>
@@ -49,11 +49,21 @@
             <Font size="56.0" />
          </font>
       </Label>
-      <Button fx:id="special_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="625.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSpecialButtonClicked" opacity="0.0" prefHeight="75.0" prefWidth="200.0" text="Special">
+      <Button fx:id="special_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="625.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSpecialButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Special">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="chargebar" blendMode="ADD" layoutX="182.0" layoutY="300.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" />
+      <ProgressBar fx:id="manaBar" blendMode="ADD" layoutX="182.0" layoutY="300.0" prefHeight="17.0" prefWidth="158.0" progress="1.0" />
+      <ImageView fx:id="fireball" fitHeight="91.0" fitWidth="148.0" layoutX="402.0" layoutY="499.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Mage Assets/fireball.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="laser" fitHeight="150.0" fitWidth="1000.0" layoutX="330.0" layoutY="500.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" scaleX="1.2" scaleY="2.0">
+         <image>
+            <Image url="@../../../images/Mage Assets/laser.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

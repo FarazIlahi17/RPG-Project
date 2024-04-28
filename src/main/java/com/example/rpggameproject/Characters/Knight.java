@@ -7,11 +7,11 @@ public class Knight extends Character {
     private int special_attack;
     public Knight(){
         this.name = "Knight";
-        this.hp = 137;
-        this.max_hp = 137;
-        this.basic_attack = 13;
+        this.hp = 147;
+        this.max_hp = this.hp;
+        this.basic_attack = 15;
         this.charge_bar = 0;
-        this.special_attack = 50;
+        this.special_attack = 65;
 
     }
     public int getBasic_attack(){

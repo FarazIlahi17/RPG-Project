@@ -36,6 +36,9 @@ public abstract class Character{
     public void setName(String name){
         this.name = name;
     }
+    public void resetHp(){
+        this.hp = this.max_hp;
+    }
 
 
 

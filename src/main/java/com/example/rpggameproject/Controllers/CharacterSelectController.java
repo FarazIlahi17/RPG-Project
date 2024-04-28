@@ -51,7 +51,7 @@ public class CharacterSelectController implements AssassinGameProcess {
     }
 
     public void createMage(ActionEvent event) throws IOException {
-        switchScene(event, "Game");
+        switchScene(event, "magefight");
 
 
     }

@@ -1,8 +1,8 @@
 package com.example.rpggameproject;
 
-import com.example.rpggameproject.Characters.Assassin;
 import com.example.rpggameproject.Characters.Enemy;
 import com.example.rpggameproject.Characters.Knight;
+import com.example.rpggameproject.Characters.Mage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public interface KnightGameProcess {
+public interface MageGameProcess {
                                             //method to switch scene based on given parameter
     default void switchScene(ActionEvent event, String new_scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(new_scene + ".fxml"));
@@ -22,7 +22,7 @@ public interface KnightGameProcess {
     }
 
     Enemy enemy = new Enemy();
-    Knight knight = new Knight();
+    Mage mage = new Mage();
 
 
     default boolean isEnemyDead(){              //all methods for enemy functions
@@ -36,43 +36,56 @@ public interface KnightGameProcess {
     }
     default void runEnemyTurn(){
         if((int)(Math.random() * 11) <= 7){
-            knight.takeDamage(enemy.getBasic_attack());
+            mage.takeDamage(enemy.getBasic_attack());
             enemy.setAttacking(true);
         }
         else {
             enemy.setheal();
             enemy.setAttacking(false);
+            if(enemy.getHp() > enemy.getMax_hp()){
+                enemy.resetHp();
+            }
         }
     }
     default void basicAttack(){
-        enemy.takeDamage(knight.getBasic_attack());
-        knight.updateBar();
+        enemy.takeDamage(mage.getBasic_attack());
+        mage.updateBar();
     }
-    default void knightSpecialAttack(){
-        enemy.takeDamage(knight.getSpecial_attack());
-        knight.resetBar();
+    default void mageSpecialAttack(){
+        enemy.takeDamage(mage.getSpecial_attack());
+        mage.updateBar();
+        mage.updateBar();
+        mage.updateBar();
+        mage.updateBar();
+    }
+    default boolean canBasicAttack(){
+        return (mage.getMana() >= 15);
+    }
+    default boolean canSpecialAttack(){
+        return (mage.getMana() >= 60);
     }
     default void heal(){
-        knight.setheal();
-        knight.updateBar();
-        if(knight.getHp() > knight.getMax_hp()){
-            knight.resetHp();
+        mage.setheal();
+        mage.manaHealed();
+        if(mage.getHp() > mage.getMax_hp()){
+            mage.resetHp();
+        }
+        if(mage.getMana() > mage.getMax_mana()){
+            mage.resetBar();
         }
     }
 
 
     default double sethpBar(){
-        return 1 - (knight.getHp() / (double)knight.getMax_hp());
+        return 1 - (mage.getHp() / (double)mage.getMax_hp());
     }
-    default double setChargeBar(){
-        return (knight.getCharge_bar() / 100.0);
-    }
-    default boolean getIsCharged(){
-        return knight.getIsCharged();
+    default double setManaBar(){
+        return (mage.getMana() / 120.0);
     }
 
-    default boolean isKnightDead(){
-        return knight.getHp() < 1;
+
+    default boolean isMageDead(){
+        return mage.getHp() < 1;
     }
 
 

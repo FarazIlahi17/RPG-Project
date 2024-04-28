@@ -4,9 +4,9 @@ public class Enemy extends Character {
     private boolean isAttacking;
     public Enemy(){
         this.name = "EnemyDude";
-        this.hp = 150;
-        this.max_hp = 150;
-        this.basic_attack = 25;
+        this.hp = 222;
+        this.max_hp = this.hp;
+        this.basic_attack = 20;
         this.isAttacking = true;
     }
 

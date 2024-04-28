@@ -52,6 +52,9 @@ public interface TankGameProcess {
     default void heal(){
         tank.setheal();
         tank.updateBar();
+        if(tank.getHp() > tank.getMax_hp()){
+            tank.resetHp();
+        }
     }
     default double sethpBar(){
         return 1 - (tank.getHp() / (double)tank.getMax_hp());
