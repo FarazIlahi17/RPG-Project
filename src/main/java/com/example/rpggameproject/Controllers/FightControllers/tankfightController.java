@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.transform.Rotate;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -26,7 +27,7 @@ public class tankfightController implements TankGameProcess {
     public Label enemyHeal_label;
 
 
-    public void delay(double fractions, String fcn){
+    public void delay(double seconds, String fcn){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -42,7 +43,7 @@ public class tankfightController implements TankGameProcess {
                 }
                 else {
                     try {
-                        long milles = (long) (fractions * 1000);
+                        long milles = (long) (seconds * 1000);
                         Thread.sleep(milles);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -50,30 +51,59 @@ public class tankfightController implements TankGameProcess {
                 }
 
                 switch(fcn) {
-                    case "setEnemyHpBar":
-                        enemyhpBar.setProgress(setEnemyhpBar());
+                    case "doEnemyAttack":
+                        runEnemyTurn();
+                        if(enemyisAttacking()) {
+                            if(isBlocked()){
+                                delay(1,"block");
+                                delay(2,"resetBlock");
+                            }
+                            else {
+                                runEnemyDamage();
+                                animate("enemyGoForwardAnimation");
+                                animate("enemyAttackAnimationp1");
+                                animate("enemyAttackAnimationp2");
+                                animate("enemyGoBackAnimation");
+                                delay(3,"putBackEnemyHpBar");
+                                delay(3,"unRotateEnemy");
+                                if(isTankDead()){
+                                    return;
+                                }
+                                delay(3.5, "bringBackAttackButton");
+                                delay(3.5, "bringBackHealButton");
+                            }
+                        }
+                        else {
+                            delay(1,"doEnemyHeal");
+                            delay(1,"updateEnemyHpBar");
+                            delay(2,"fixEnemyHeal");
+                            delay(2,"bringBackAttackButton");
+                            delay(2,"bringBackHealButton");
+                        }
                         break;
+
                     case "setBulletImage":
                         bullet.setOpacity(0);
+                        break;
+
+                    case "updateEnemyHpBar":
+                        enemyhpBar.setProgress(setEnemyhpBar());
+                        break;
+                    case "doEnemyHeal":
+                        enemyHeal_label.setOpacity(1);
+                        System.out.println("Enemy hp after is: " + setEnemyhpBar());
                         break;
                     case "fixHeal":
                         playerHeal_label.setOpacity(0);
                         break;
-                    case "doEnemyAttack":
-                        hpBar.setProgress(sethpBar());
-                        enemy_img.setLayoutX(300);
-                        enemyhpBar.setOpacity(0);
-                        break;
-                    case "setEnemyImage":
-                        enemy_img.setLayoutX(1100);
-                        enemyhpBar.setOpacity(1);
-                        break;
                     case "fixEnemyHeal":
                         enemyHeal_label.setOpacity(0);
                         break;
-                    case "doEnemyHeal":
-                        enemyHeal_label.setOpacity(1);
-                        enemyhpBar.setProgress(setEnemyhpBar());
+                    case "putBackEnemyHpBar":
+                        enemyhpBar.setOpacity(1);
+                        break;
+                    case "unRotateEnemy":
+                        enemy_img.setRotate(0);
                         break;
                     case "resetBlock":
                         enemy_img.setLayoutX(1100);
@@ -87,12 +117,14 @@ public class tankfightController implements TankGameProcess {
                         enemy_img.setLayoutX(700);
                         enemyhpBar.setOpacity(0);
                         break;
+
                     case "bringBackAttackButton":
                         attack_btn.setLayoutX(350);
                         break;
                     case "bringBackHealButton":
                         heal_btn.setLayoutX(900);
                         break;
+
                     case "endGame":
                         attack_btn.setLayoutX(10000);
                         heal_btn.setLayoutX(10000);
@@ -100,6 +132,7 @@ public class tankfightController implements TankGameProcess {
                         endGame_btn.setOpacity(1);
                         break;
                     case "killEnemy":
+                        enemy_img.setRotationAxis(Rotate.Z_AXIS);
                         enemy_img.setRotate(90);
                         enemy_img.setLayoutX(1200);
                         enemy_img.setLayoutY(400);
@@ -124,8 +157,100 @@ public class tankfightController implements TankGameProcess {
                         hpBar.setOpacity(0);
                         delay(1,"runAway");
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + fcn);
                 }
             }
+        });
+    }
+    public void animate(String fcn){
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                switch (fcn){
+                    case "bulletAnimation":
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyGoForwardAnimation":
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        enemyhpBar.setOpacity(0);
+                        for(int i = 1100; i >= 300; i-=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyAttackAnimationp1":
+                        try {
+                            Thread.sleep(1750);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 300; i >= 150; i-=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                        case "enemyAttackAnimationp2":
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 150; i <= 300; i+=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyGoBackAnimation":
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        enemy_img.setRotate(180);
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 300; i <= 1100; i+=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                }
+            }
+
         });
     }
 
@@ -133,39 +258,19 @@ public class tankfightController implements TankGameProcess {
         if(isEnemyDead()){
             return;
         }
-        runEnemyTurn();
-        if(enemyisAttacking()) {
-            if(isBlocked()){
-                delay(3,"block");
-                delay(4,"resetBlock");
-            }
-            else {
-                runEnemyDamage();
-                delay(3, "doEnemyAttack");
-                delay(4, "setEnemyImage");
-                if(isTankDead()){
-                    return;
-                }
-                delay(4, "bringBackAttackButton");
-                delay(4, "bringBackHealButton");
-            }
-        }
-        else {
-            delay(3,"doEnemyHeal");
-            delay(4,"fixEnemyHeal");
-            delay(4, "bringBackAttackButton");
-            delay(4, "bringBackHealButton");
-        }
+        delay(1.2,"doEnemyAttack");
     }
 
     public void onAttackButtonClicked(){
+
         bullet.setOpacity(1);
         bullet.setLayoutX(350);
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         basicAttack();
-        delay(1.1,"bulletAnimation");
-        delay(1.1,"setEnemyHpBar");
+        System.out.println("Enemy hp b4 is: " + setEnemyhpBar());
+        animate("bulletAnimation");
+        delay(1.1,"updateEnemyHpBar");
         delay(1.1,"setBulletImage");
         doEnemyAttack();
         if(isEnemyDead()){

@@ -16,13 +16,11 @@
             <Image url="@../../../images/General Assets/gameScreen.png" />
          </image>
       </ImageView>
+      <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="110.0" layoutY="457.0" prefHeight="17.0" prefWidth="239.0" progress="0.0" rotate="180.0" />
       <ImageView fx:id="white_flag" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="430.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Tank%20Assets/white_flag.png" />
          </image>
-      </ImageView>
-      <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../images/General Assets/enemy.png" />
       </ImageView>
       <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="50.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,6 +29,12 @@
          <rotationAxis>
             <Point3D y="1.0" />
          </rotationAxis></ImageView>
+      <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../../images/General Assets/enemy.png" />
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis>
+      </ImageView>
       <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack" textFill="RED">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
@@ -41,7 +45,6 @@
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="110.0" layoutY="457.0" prefHeight="17.0" prefWidth="239.0" progress="0.0" rotate="180.0" />
       <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1260.0" layoutY="280.0" prefHeight="20.0" prefWidth="220.0" progress="0.0" rotate="180.0" />
       <Label fx:id="enemyHeal_label" layoutX="1300.0" layoutY="170.0" opacity="0.0" prefHeight="91.0" prefWidth="136.0" text="Heal" textFill="#ff6b00">
          <font>
