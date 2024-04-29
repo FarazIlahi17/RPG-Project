@@ -42,11 +42,13 @@ public interface TankGameProcess {
         enemy.takeDamage(tank.getBasic_attack());
         tank.updateBar();
     }
+    default void spamAttack(){
+        enemy.takeDamage(tank.getSpamAttack());
+    }
     default boolean isBlocked(){
         if((int)(Math.random() * 101) <= tank.getBlock_chance()){
             tank.resetBar();
             return true;
-
         }
         return false;
     }

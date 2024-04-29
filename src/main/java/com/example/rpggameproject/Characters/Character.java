@@ -30,7 +30,7 @@ public abstract class Character{
 
     @Override
     public String toString() {
-        return this.hp + "/" + this.max_hp;
+        return "hp: " + this.hp + "/" + this.max_hp;
     }
 
     public void takeDamage(int damage){

@@ -12,7 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.FightControllers.assassinfightController">
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1600.0" layoutX="-15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" scaleX="1.44">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="800.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
+      <ImageView fx:id="background" fitHeight="800.0" fitWidth="1600.0" layoutX="-15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" scaleX="1.44">
          <image>
             <Image url="@../../../images/General Assets/gameScreen.png" />
          </image>
@@ -23,10 +24,13 @@
             <Point3D y="1.0" />
          </rotationAxis>
       </ImageView>
-      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Assassin Assets/assassin.png" />
-         </image></ImageView>
+         </image>
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis></ImageView>
       <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack" textFill="RED">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
@@ -37,8 +41,13 @@
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="221.0" layoutY="391.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" rotate="180.0" />
+      <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="221.0" layoutY="391.0" prefHeight="34.0" prefWidth="158.0" progress="0.0" rotate="180.0" />
       <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1260.0" layoutY="276.0" prefHeight="34.0" prefWidth="220.0" progress="0.0" rotate="180.0" />
+      <ImageView fx:id="slash" fitHeight="468.0" fitWidth="583.0" layoutX="1026.0" layoutY="277.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Assassin%20Assets/slash%20(1).png" />
+         </image>
+      </ImageView>
       <Label fx:id="crit_label" layoutX="1325.0" layoutY="170.0" opacity="0.0" prefHeight="91.0" prefWidth="96.0" text="Crit" textFill="#00ff28">
          <font>
             <Font size="56.0" />
@@ -59,7 +68,9 @@
             <Font name="Copperplate Gothic Bold" size="53.0" />
          </font>
       </Button>
-      <Rectangle fx:id="enemyHp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="1408.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
-      <Label fx:id="enemyHp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="1416.0" layoutY="290.0" prefHeight="20.0" prefWidth="63.0" />
+      <Rectangle fx:id="enemyHp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10000.0" layoutY="287.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Label fx:id="enemyHp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="10000.0" layoutY="287.0" prefHeight="20.0" prefWidth="63.0" />
+      <Rectangle fx:id="hp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10000.0" layoutY="402.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Label fx:id="hp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="229.0" layoutY="402.0" prefHeight="20.0" prefWidth="63.0" />
    </children>
 </AnchorPane>

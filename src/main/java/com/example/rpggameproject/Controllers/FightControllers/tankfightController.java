@@ -20,6 +20,26 @@ public class tankfightController implements TankGameProcess {
     @FXML
     private ImageView bullet;
     @FXML
+    private ImageView bullet1;
+    @FXML
+    private ImageView bullet2;
+    @FXML
+    private ImageView bullet3;
+    @FXML
+    private ImageView bullet4;
+    @FXML
+    private ImageView bullet5;
+    @FXML
+    private ImageView bullet6;
+    @FXML
+    private ImageView bullet7;
+    @FXML
+    private ImageView bullet8;
+    @FXML
+    private ImageView bullet9;
+    @FXML
+    private ImageView bullet10;
+    @FXML
     private ImageView shield;
     @FXML
     private ImageView white_flag;
@@ -27,7 +47,12 @@ public class tankfightController implements TankGameProcess {
     private Button attack_btn;
     @FXML
     private Button heal_btn;
-
+    @FXML
+    private Button useSpam_btn;
+    @FXML
+    private Button spamAttack_btn;
+    @FXML
+    private Button back_btn;
     @FXML
     private Button endGame_btn;
     @FXML
@@ -41,226 +66,307 @@ public class tankfightController implements TankGameProcess {
 
 
     public void delay(double seconds, String fcn){
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    long milles = (long) (seconds * 1000);
-                    Thread.sleep(milles);
-                }
-                catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                long milles = (long) (seconds * 1000);
+                Thread.sleep(milles);
+            }
+            catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
-                switch(fcn) {
-                    case "runEnemyAttack":
-                        animate("enemyGoForwardAnimation");
-                        animate("enemyAttackAnimationp1");
-                        animate("enemyAttackAnimationp2");
-                        animate("enemyGoBackAnimation");
-                        delay(3,"putBackEnemyHpBar");
-                        delay(3,"unRotateEnemy");
-                        if(isTankDead()){
-                            return;
+            switch(fcn) {
+                case "runEnemyAttack":
+                    runEnemyDamage();
+                    animate("enemyGoForwardAnimation");
+                    animate("enemyAttackAnimationp1");
+                    animate("enemyAttackAnimationp2");
+                    animate("enemyGoBackAnimation");
+                    delay(3,"putBackEnemyHpBar");
+                    delay(3,"unRotateEnemy");
+                    if(isTankDead()){
+                        return;
+                    }
+                    delay(3.5, "bringBackAttackButton");
+                    delay(3.5, "bringBackHealButton");
+                    break;
+                case "runEnemyHeal":
+                    runEnemyHeal();
+                    delay(1,"doEnemyHeal");
+                    delay(1,"updateEnemyHpBar");
+                    delay(2,"getRidOfEnemyHeal");
+                    delay(2,"bringBackAttackButton");
+                    delay(2,"bringBackHealButton");
+                    break;
+
+                case "getRidOfBulletImage":
+                    bullet.setOpacity(0);
+                    break;
+
+                case "updateEnemyHpBar":
+                    enemyhpBar.setProgress(setEnemyhpBar());
+                    break;
+                case "doEnemyHeal":
+                    enemyHeal_label.setOpacity(1);
+                    break;
+                case "fixHeal":
+                    playerHeal_label.setOpacity(0);
+                    break;
+                case "getRidOfEnemyHeal":
+                    enemyHeal_label.setOpacity(0);
+                    break;
+                case "putBackEnemyHpBar":
+                    enemyhpBar.setOpacity(1);
+                    break;
+                case "unRotateEnemy":
+                    enemy_img.setRotationAxis(Rotate.Y_AXIS);
+                    enemy_img.setRotate(0);
+                    break;
+                case "getRidOfSheild":
+                    shield.setOpacity(0);
+                    break;
+
+                case "bringBackAttackButton":
+                    attack_btn.setLayoutX(350);
+                    break;
+                case "bringBackHealButton":
+                    heal_btn.setLayoutX(900);
+                    break;
+
+                case "endGame":
+                    attack_btn.setLayoutX(10000);
+                    heal_btn.setLayoutX(10000);
+                    endGame_btn.setLayoutX(575);
+                    endGame_btn.setOpacity(1);
+                    break;
+                case "killEnemy":
+                    enemy_img.setRotationAxis(Rotate.Z_AXIS);
+                    enemy_img.setRotate(90);
+                    enemy_img.setLayoutX(1200);
+                    enemy_img.setLayoutY(400);
+                    enemyhpBar.setOpacity(0);
+                    break;
+                case "runAway":
+                    for(int i = 200; i >= -300; i-=5){
+                        white_flag.setLayoutX(i);
+                        player_img.setLayoutX(i-150);
+                        try {
+                            Thread.sleep(5);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
                         }
-                        delay(3.5, "bringBackAttackButton");
-                        delay(3.5, "bringBackHealButton");
-                        break;
-                    case "runEnemyHeal":
-                        delay(1,"doEnemyHeal");
-                        delay(1,"updateEnemyHpBar");
-                        delay(2,"getRidOfEnemyHeal");
-                        delay(2,"bringBackAttackButton");
-                        delay(2,"bringBackHealButton");
-                        break;
-
-                    case "getRidOfBulletImage":
-                        bullet.setOpacity(0);
-                        break;
-
-                    case "updateEnemyHpBar":
-                        enemyhpBar.setProgress(setEnemyhpBar());
-                        break;
-                    case "doEnemyHeal":
-                        enemyHeal_label.setOpacity(1);
-                        break;
-                    case "fixHeal":
-                        playerHeal_label.setOpacity(0);
-                        break;
-                    case "getRidOfEnemyHeal":
-                        enemyHeal_label.setOpacity(0);
-                        break;
-                    case "putBackEnemyHpBar":
-                        enemyhpBar.setOpacity(1);
-                        break;
-                    case "unRotateEnemy":
-                        enemy_img.setRotate(0);
-                        break;
-                    case "resetBlock":
-                        enemy_img.setLayoutX(1100);
-                        shield.setOpacity(0);
-                        attack_btn.setLayoutX(350);
-                        heal_btn.setLayoutX(900);
-                        enemyhpBar.setOpacity(1);
-                        break;
-                    case "block":
-                        shield.setOpacity(1);
-                        enemy_img.setLayoutX(700);
-                        enemyhpBar.setOpacity(0);
-                        break;
-
-                    case "bringBackAttackButton":
-                        attack_btn.setLayoutX(350);
-                        break;
-                    case "bringBackHealButton":
-                        heal_btn.setLayoutX(900);
-                        break;
-
-                    case "endGame":
-                        attack_btn.setLayoutX(10000);
-                        heal_btn.setLayoutX(10000);
-                        endGame_btn.setLayoutX(575);
-                        endGame_btn.setOpacity(1);
-                        break;
-                    case "killEnemy":
-                        enemy_img.setRotationAxis(Rotate.Z_AXIS);
-                        enemy_img.setRotate(90);
-                        enemy_img.setLayoutX(1200);
-                        enemy_img.setLayoutY(400);
-                        enemyhpBar.setOpacity(0);
-                        break;
-                    case "runAway":
-                        for(int i = 200; i >= -300; i-=5){
-                            white_flag.setLayoutX(i);
-                            player_img.setLayoutX(i-150);
-                            try {
-                                Thread.sleep(5);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                    case "killPlayer":
-                        player_img.setRotate(180);
-                        white_flag.setOpacity(1);
-                        white_flag.setLayoutX(200);
-                        player_img.setLayoutX(50);
-                        hpBar.setOpacity(0);
-                        delay(1,"runAway");
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + fcn);
-                }
+                    }
+                    break;
+                case "killPlayer":
+                    player_img.setRotate(180);
+                    white_flag.setOpacity(1);
+                    white_flag.setLayoutX(200);
+                    player_img.setLayoutX(50);
+                    hpBar.setOpacity(0);
+                    delay(1,"runAway");
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + fcn);
             }
         });
     }
     public void animate(String fcn){
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                switch (fcn){
-                    case "bulletAnimation":
-                        for(int i = 350; i <= 1200; i+=5){
-                            bullet.setLayoutX(i);
-                            try {
-                                Thread.sleep(5);
-                            }
-                            catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                    case "enemyGoForwardAnimation":
+        Executors.newSingleThreadExecutor().execute(() -> {
+            switch (fcn){
+                case "bulletAnimation":
+                    for(int i = 350; i <= 1200; i+=5){
+                        bullet.setLayoutX(i);
                         try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                        enemyhpBar.setOpacity(0);
-                        for(int i = 1100; i >= 300; i-=10){
-                            enemy_img.setLayoutX(i);
-                            try {
-                                Thread.sleep(5);
-                            }
-                            catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                    case "enemyAttackAnimationp1":
+                    }
+                    break;
+                case "blockAnimationp1":
+                    try {
+                        Thread.sleep(1200);
+                    }
+                    catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    shield.setOpacity(1);
+                    enemyhpBar.setOpacity(0);
+                    for(int i = -300; i <= 400; i+=15){
+                        shield.setLayoutY(i);
                         try {
-                            Thread.sleep(1750);
-                        } catch (InterruptedException e) {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                        hpBar.setProgress(sethpBar());
-                        for(int i = 300; i >= 150; i-=10){
-                            enemy_img.setLayoutX(i);
-                            try {
-                                Thread.sleep(5);
-                            }
-                            catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                        case "enemyAttackAnimationp2":
+                    }
+                    break;
+                case "blockAnimationp2":
+                    try {
+                        Thread.sleep(2200);
+                    }
+                    catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    for(int i = 400; i >= -300; i-=5){
+                        shield.setLayoutY(i);
                         try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                        hpBar.setProgress(sethpBar());
-                        for(int i = 150; i <= 300; i+=10){
-                            enemy_img.setLayoutX(i);
-                            try {
-                                Thread.sleep(5);
-                            }
-                            catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                    case "enemyGoBackAnimation":
-                        try {
-                            Thread.sleep(2500);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        enemy_img.setRotate(180);
-                        hpBar.setProgress(sethpBar());
-                        for(int i = 300; i <= 1100; i+=10){
-                            enemy_img.setLayoutX(i);
-                            try {
-                                Thread.sleep(5);
-                            }
-                            catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        break;
-                }
-            }
+                    }
+                    delay(.1,"getRidOfSheild");
+                    delay(.5,"bringBackAttackButton");
+                    delay(.5,"bringBackHealButton");
 
+                    break;
+
+                case "enemyBlockedAnimation1":
+                    try {
+                        Thread.sleep(1200);
+                    }
+                    catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    for(int i = 1100; i >= 700; i-=5){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                case "enemyBlockedAnimation2":
+                    try {
+                        Thread.sleep(2200);
+                    }
+                    catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    enemy_img.setRotationAxis(Rotate.Y_AXIS);
+                    enemy_img.setRotate(180);
+                    for(int i = 700; i <= 1100; i+=5){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    delay(.2,"unRotateEnemy");
+                    delay(.2,"putBackEnemyHpBar");
+                    break;
+
+
+                case "enemyGoForwardAnimation":
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    enemyhpBar.setOpacity(0);
+                    for(int i = 1100; i >= 300; i-=10){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                case "enemyAttackAnimationp1":
+                    try {
+                        Thread.sleep(1750);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    hpBar.setProgress(sethpBar());
+                    for(int i = 300; i >= 150; i-=10){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                    case "enemyAttackAnimationp2":
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    hpBar.setProgress(sethpBar());
+                    for(int i = 150; i <= 300; i+=10){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                case "enemyGoBackAnimation":
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    enemy_img.setRotate(180);
+                    hpBar.setProgress(sethpBar());
+                    for(int i = 300; i <= 1100; i+=10){
+                        enemy_img.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        }
+                        catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+            }
         });
     }
-    public void enemyChoice(){
+    public void enemyChoice(double wait){
         if((int)(Math.random() * 11) <= 7){
             if(isBlocked()){
-                delay(1.2,"block");
-                delay(2.2,"resetBlock");
+                animate("blockAnimationp1");
+                animate("enemyBlockedAnimation1");
+                animate("blockAnimationp2");
+                animate("enemyBlockedAnimation2");
                 return;
             }
-            runEnemyDamage();
-            delay(1.2,"runEnemyAttack");
+            delay(wait,"runEnemyAttack");
         }
         else {
-            runEnemyHeal();
-            delay(1.2,"runEnemyHeal");
+            delay(wait,"runEnemyHeal");
         }
     }
+    public void isPlayerDead (double waitTime){
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                Thread.sleep((long)(waitTime * 1000));
+            }
+            catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            if(isTankDead()){
+                delay(3,"endGame");
+                delay(2,"killPlayer");
+            }
+        });
+    }
     public void onAttackButtonClicked(){
-
         bullet.setOpacity(1);
         bullet.setLayoutX(350);
         attack_btn.setLayoutX(10000);
@@ -274,11 +380,8 @@ public class tankfightController implements TankGameProcess {
             delay(2,"killEnemy");
             return;
         }
-        enemyChoice();
-        if(isTankDead()){
-            delay(6,"endGame");
-            delay(5,"killPlayer");
-        }
+        enemyChoice(1);
+        isPlayerDead(3);
 
     }
 
@@ -289,11 +392,8 @@ public class tankfightController implements TankGameProcess {
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
         delay(1, "fixHeal");
-        enemyChoice();
-        if (isTankDead()) {
-            delay(5.5, "endGame");
-            delay(4.5, "killPlayer");
-        }
+        enemyChoice(1.2);
+        isPlayerDead(3);
     }
         public void onEndGameButtonClicked(ActionEvent event) throws IOException {
             if(isEnemyDead()){
@@ -302,6 +402,24 @@ public class tankfightController implements TankGameProcess {
             else {
                 switchScene(event, "loseEndScreen");
             }
+        }
+        public void onUseSpamButtonClicked(){
+            attack_btn.setLayoutX(10000);
+            heal_btn.setLayoutX(10000);
+            useSpam_btn.setLayoutX(10000);
+            back_btn.setLayoutX(250);
+            spamAttack_btn.setLayoutX(630);
+        }
+
+        public void onBackButtonClicked(){
+            back_btn.setLayoutX(10000);
+            spamAttack_btn.setLayoutX(10000);
+            attack_btn.setLayoutX(350);
+            heal_btn.setLayoutX(900);
+            useSpam_btn.setLayoutX(630);
+        }
+        public void onSpamButtonClicked(){
+            spamAttack();
         }
 }
 

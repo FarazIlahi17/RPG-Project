@@ -11,7 +11,7 @@
          <font>
             <Font size="57.0" />
          </font></Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="85.0" prefHeight="159.0" prefWidth="474.0" text="You Win">
+      <Label fx:id="win_label" alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="85.0" prefHeight="159.0" prefWidth="474.0" text="You Win">
          <font>
             <Font size="75.0" />
          </font>

@@ -20,20 +20,15 @@ public interface ControlEndGame {
         stage.setScene(scene);
         stage.show();
     }
-    Character player = new Character() {
-        @Override
-        public int getBasic_attack() {
-            return 0;
-        }
-        @Override
-        public void updateBar() {
-        }
-    };
+    Assassin player = new Assassin();
 
 
     default void setName(String name){
         player.setName(name);
         System.out.println("My name is: " + player.getName());
+    }
+    default String getName(){
+        return player.getName();
     }
 
 

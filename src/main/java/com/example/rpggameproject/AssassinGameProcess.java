@@ -69,6 +69,9 @@ public interface AssassinGameProcess {
     default double sethpBar(){
         return 1 - (assassin.getHp() / (double)assassin.getMax_hp());
     }
+    default String getHp(){
+        return assassin.toString();
+    }
     default boolean isAssassinDead(){
         return assassin.getHp() < 1;
     }
