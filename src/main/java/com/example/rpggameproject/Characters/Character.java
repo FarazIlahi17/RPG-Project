@@ -3,7 +3,6 @@ package com.example.rpggameproject.Characters;
 public abstract class Character{
     protected String name;
     protected int hp;
-
     protected int max_hp;
     protected int basic_attack;
 

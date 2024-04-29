@@ -7,10 +7,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.WinEndScreenController">
    <children>
-      <Button fx:id="endGame_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="700.0" layoutY="350.0" mnemonicParsing="false" onAction="#setEndGame_btn" prefHeight="100.0" prefWidth="200.0" text="End Game" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="607.0" layoutY="91.0" prefHeight="127.0" prefWidth="386.0" text="You Win">
+      <Button fx:id="endGame_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="700.0" layoutY="350.0" mnemonicParsing="false" onAction="#setEndGame_btn" prefHeight="100.0" prefWidth="200.0" text="Quit">
          <font>
-            <Font size="44.0" />
+            <Font size="57.0" />
+         </font></Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="85.0" prefHeight="159.0" prefWidth="474.0" text="You Win">
+         <font>
+            <Font size="75.0" />
          </font>
       </Label>
    </children>

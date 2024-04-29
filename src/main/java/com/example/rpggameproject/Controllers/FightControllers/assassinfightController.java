@@ -18,6 +18,8 @@ public class assassinfightController implements AssassinGameProcess {
     public ImageView player_img;
     public Button attack_btn;
     public Button heal_btn;
+
+    public Button endGame_btn;
     public ProgressBar hpBar;
     public ProgressBar enemyhpBar;
     public Label crit_label;
@@ -52,34 +54,63 @@ public class assassinfightController implements AssassinGameProcess {
                         break;
                     case "setEnemyImage":
                         enemy_img.setLayoutX(1100);
-                        attack_btn.setLayoutX(350);
-                        heal_btn.setLayoutX(900);
                         enemyhpBar.setOpacity(1);
                         break;
                     case "fixEnemyHeal":
                         enemyHeal_label.setOpacity(0);
-                        attack_btn.setLayoutX(350);
-                        heal_btn.setLayoutX(900);
                         break;
                     case "doEnemyHeal":
                         enemyHeal_label.setOpacity(1);
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
-                    case "doNothing":
+                    case "endGame":
+                        attack_btn.setLayoutX(10000);
+                        heal_btn.setLayoutX(10000);
+                        endGame_btn.setLayoutX(575);
+                        endGame_btn.setOpacity(1);
+                        break;
+                    case "bringBackAttackButton":
+                        attack_btn.setLayoutX(350);
+                        break;
+                    case "bringBackHealButton":
+                        heal_btn.setLayoutX(900);
+                        break;
+                    case "killEnemy":
+                        enemy_img.setRotate(90);
+                        enemy_img.setLayoutX(1200);
+                        enemy_img.setLayoutY(400);
+                        enemyhpBar.setOpacity(0);
+                        break;
+                    case "killPlayer":
+                        player_img.setRotate(270);
+                        player_img.setLayoutX(90);
+                        player_img.setLayoutY(500);
+                        hpBar.setOpacity(0);
                         break;
                 }
             }
         });
     }
     public void doEnemyAttack(){
+        if(isEnemyDead()){
+            return;
+        }
         runEnemyTurn();
         if(enemyisAttacking()) {
             delay(2, "doEnemyAttack");
             delay(3, "setEnemyImage");
+            if(isAssassinDead()){
+                return;
+            }
+            delay(3, "bringBackAttackButton");
+            delay(3, "bringBackHealButton");
+
         }
         else {
             delay(2,"doEnemyHeal");
             delay(3,"fixEnemyHeal");
+            delay(3, "bringBackAttackButton");
+            delay(3, "bringBackHealButton");
         }
     }
 
@@ -98,10 +129,12 @@ public class assassinfightController implements AssassinGameProcess {
         delay(1,"setPlayerImage");
         doEnemyAttack();
         if(isEnemyDead()){
-            switchScene(event,"winEndScreen");
+            delay(2,"endGame");
+            delay(2,"killEnemy");
         }
         if(isAssassinDead()){
-            switchScene(event,"loseEndScreen");
+            delay(3,"endGame");
+            delay(3,"killPlayer");
         }
     }
 
@@ -114,7 +147,15 @@ public class assassinfightController implements AssassinGameProcess {
         delay(1,"fixHeal");
         doEnemyAttack();
         if(isAssassinDead()){
-            switchScene(event,"loseEndScreen");
+            delay(3,"endGame");
+            delay(3,"killPlayer");        }
+    }
+    public void onEndGameButtonClicked(ActionEvent event) throws IOException {
+        if(isEnemyDead()){
+            switchScene(event, "winEndScreen");
+        }
+        else {
+            switchScene(event, "loseEndScreen");
         }
     }
 }

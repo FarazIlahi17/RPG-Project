@@ -18,6 +18,8 @@ public class knightfightController implements KnightGameProcess {
     public Button attack_btn;
     public Button heal_btn;
     public Button special_btn;
+
+    public Button endGame_btn;
     public ProgressBar hpBar;
     public ProgressBar chargebar;
     public ProgressBar enemyhpBar;
@@ -45,9 +47,6 @@ public class knightfightController implements KnightGameProcess {
                     case "fixSpecial_Label":
                         special_label.setOpacity(0);
                         break;
-                    case "setSpecialButton":
-                        special_btn.setOpacity(1);
-                        break;
                     case "fixHeal":
                         playerHeal_label.setOpacity(0);
                         break;
@@ -58,22 +57,44 @@ public class knightfightController implements KnightGameProcess {
                         break;
                     case "setEnemyImage":
                         enemy_img.setLayoutX(1100);
-                        attack_btn.setLayoutX(350);
-                        heal_btn.setLayoutX(900);
-                        special_btn.setLayoutX(625);
                         enemyhpBar.setOpacity(1);
                         break;
                     case "fixEnemyHeal":
                         enemyHeal_label.setOpacity(0);
-                        attack_btn.setLayoutX(350);
-                        heal_btn.setLayoutX(900);
-                        special_btn.setLayoutX(625);
                         break;
                     case "doEnemyHeal":
                         enemyHeal_label.setOpacity(1);
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
-                    case "doNothing":
+                    case "bringBackAttackButton":
+                        attack_btn.setLayoutX(350);
+                        break;
+                    case "bringBackSpecialButton":
+                        special_btn.setLayoutX(625);
+                        special_btn.setOpacity(1);
+                        break;
+                    case "bringBackHealButton":
+                        heal_btn.setLayoutX(900);
+                        break;
+                    case "endGame":
+                        attack_btn.setLayoutX(10000);
+                        heal_btn.setLayoutX(10000);
+                        special_btn.setLayoutX(10000);
+                        endGame_btn.setLayoutX(575);
+                        endGame_btn.setOpacity(1);
+                        break;
+                    case "killEnemy":
+                        enemy_img.setRotate(90);
+                        enemy_img.setLayoutX(1200);
+                        enemy_img.setLayoutY(400);
+                        enemyhpBar.setOpacity(0);
+                        break;
+                    case "killPlayer":
+                        player_img.setRotate(270);
+                        player_img.setLayoutX(50);
+                        player_img.setLayoutY(470);
+                        hpBar.setOpacity(0);
+                        chargebar.setOpacity(0);
                         break;
                 }
             }
@@ -81,20 +102,30 @@ public class knightfightController implements KnightGameProcess {
     }
 
     public void doEnemyAttack(){
+        if(isEnemyDead()){
+            return;
+        }
         runEnemyTurn();
         if (enemyisAttacking()) {
             delay(2, "doEnemyAttack");
             delay(3, "setEnemyImage");
-            if (getIsCharged()) {
-                delay(3, "setSpecialButton");
+            if(isKnightDead()){
+                return;
             }
+            if (getIsCharged()) {
+                delay(3, "bringBackSpecialButton");
+            }
+            delay(3, "bringBackAttackButton");
+            delay(3, "bringBackHealButton");
         }
         else {
             delay(2, "doEnemyHeal");
             delay(3, "fixEnemyHeal");
             if (getIsCharged()) {
-                delay(3, "setSpecialButton");
+                delay(3, "bringBackSpecialButton");
             }
+            delay(3, "bringBackAttackButton");
+            delay(3, "bringBackHealButton");
         }
     }
 
@@ -110,10 +141,13 @@ public class knightfightController implements KnightGameProcess {
         delay(1, "setPlayerImage");
         doEnemyAttack();
         if (isEnemyDead()) {
-            switchScene(event, "winEndScreen");
+            delay(2,"endGame");
+            delay(2,"killEnemy");
         }
         if (isKnightDead()) {
-            switchScene(event, "loseEndScreen");
+            delay(3, "endGame");
+            delay(3, "killPlayer");
+
         }
     }
 
@@ -128,7 +162,9 @@ public class knightfightController implements KnightGameProcess {
         delay(1, "fixHeal");
         doEnemyAttack();
         if (isKnightDead()) {
-            switchScene(event, "loseEndScreen");
+            delay(3, "endGame");
+            delay(3, "killPlayer");
+
         }
     }
 
@@ -146,13 +182,27 @@ public class knightfightController implements KnightGameProcess {
         delay(1, "setPlayerImage");
         doEnemyAttack();
         if (isEnemyDead()) {
-            switchScene(event, "winEndScreen");
+            delay(2,"endGame");
+            delay(2,"killEnemy");
         }
         if (isKnightDead()) {
+            delay(3, "endGame");
+            delay(3, "killPlayer");
+
+        }
+    }
+
+    public void onEndGameButtonClicked(ActionEvent event) throws IOException {
+        if(isEnemyDead()){
+            switchScene(event, "winEndScreen");
+        }
+        else {
             switchScene(event, "loseEndScreen");
         }
     }
 }
+
+
 
 
 

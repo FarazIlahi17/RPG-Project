@@ -19,6 +19,7 @@ public class magefightController implements MageGameProcess {
     public Button attack_btn;
     public Button heal_btn;
     public Button special_btn;
+    public Button endGame_btn;
     public ProgressBar hpBar;
     public ProgressBar manaBar;
     public ProgressBar enemyhpBar;
@@ -31,7 +32,17 @@ public class magefightController implements MageGameProcess {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                if (!fcn.equals("fireBallAnimation")){
+                if(fcn.equals("fireBallAnimation")){
+                    for(int i = 300; i <= 1200; i+=5){
+                        fireball.setLayoutX(i);
+                        try {
+                            Thread.sleep(5);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+                else {
                     try {
                         long milles = (long)(fraction * 1000);
                         Thread.sleep(milles);
@@ -39,26 +50,7 @@ public class magefightController implements MageGameProcess {
                         throw new RuntimeException(e);
                     }
                 }
-                else{
-                    for(int i = 300; i <= 1200; i++){
-                        fireball.setLayoutX(i);
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
                 switch (fcn) {
-                    case "fireBallAnimation1":
-                        fireball.setLayoutX(700);
-                        break;
-                    case "fireBallAnimation2":
-                        fireball.setLayoutX(900);
-                        break;
-                    case "fireBallAnimation3":
-                        fireball.setLayoutX(1200);
-                        break;
                     case "laserAnimation":
                         laser.setOpacity(0);
                         break;
@@ -84,53 +76,87 @@ public class magefightController implements MageGameProcess {
                         break;
                     case "setEnemyImage":
                         enemy_img.setLayoutX(1100);
-                        heal_btn.setLayoutX(900);
                         enemyhpBar.setOpacity(1);
                         break;
                     case "fixEnemyHeal":
                         enemyHeal_label.setOpacity(0);
-                        heal_btn.setLayoutX(900);
                         break;
                     case "doEnemyHeal":
                         enemyHeal_label.setOpacity(1);
                         enemyhpBar.setProgress(setEnemyhpBar());
                         break;
-                    case "setBasicAttackbutton":
+                    case "bringBackAttackButton":
                         attack_btn.setLayoutX(350);
+                        attack_btn.setOpacity(1);
                         break;
-                    case "setSpecialAttackbutton":
-                        attack_btn.setLayoutX(350);
+                    case "bringBackSpecialButton":
                         special_btn.setLayoutX(625);
+                        special_btn.setOpacity(1);
+                        break;
+                    case "bringBackHealButton":
+                        heal_btn.setLayoutX(900);
+                        heal_btn.setOpacity(1);
+                        break;
+                    case "endGame":
+                        attack_btn.setLayoutX(10000);
+                        heal_btn.setLayoutX(10000);
+                        special_btn.setLayoutX(10000);
+                        endGame_btn.setLayoutX(575);
+                        endGame_btn.setOpacity(1);
+                        break;
+                    case "killEnemy":
+                        enemy_img.setRotate(90);
+                        enemy_img.setLayoutX(1200);
+                        enemy_img.setLayoutY(400);
+                        enemyhpBar.setOpacity(0);
+                        break;
+                    case "killPlayer":
+                        player_img.setRotate(270);
+                        player_img.setLayoutX(50);
+                        player_img.setLayoutY(450);
+                        hpBar.setOpacity(0);
+                        manaBar.setOpacity(0);
                         break;
                 }
             }
         });
     }
     public void doEnemyAttack(){
+        if(isEnemyDead()){
+            return;
+        }
         runEnemyTurn();
         if (enemyisAttacking()) {
             delay(3, "doEnemyAttack");
             delay(4, "setEnemyImage");
+            if(isMageDead()){
+                return;
+            }
             if (canSpecialAttack()){
-                delay(4, "setSpecialAttackbutton");
+                delay(4, "bringBackSpecialButton");
+                delay(4, "bringBackAttackButton");
             }
             else if (canBasicAttack()){
-                delay(4, "setBasicAttackbutton");
+                delay(4, "bringBackAttackButton");
             }
+            delay(4, "bringBackHealButton");
+
         }
         else {
             delay(3, "doEnemyHeal");
             delay(4, "fixEnemyHeal");
             if (canSpecialAttack()){
-                delay(4, "setSpecialAttackbutton");
+                delay(4, "bringBackSpecialButton");
+                delay(4, "bringBackAttackButton");
             }
             else if (canBasicAttack()){
-                delay(4, "setBasicAttackbutton");
+                delay(4, "bringBackAttackButton");
             }
+            delay(4, "bringBackHealButton");
         }
     }
 
-    public void onAttackButtonClicked(ActionEvent event) throws IOException {
+    public void onAttackButtonClicked(){
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         special_btn.setLayoutX(10000);
@@ -138,19 +164,21 @@ public class magefightController implements MageGameProcess {
         fireball.setLayoutX(400);
         basicAttack();
         manaBar.setProgress(setManaBar());
-        delay(1.8, "fireBallAnimation");
-        delay(1.8,"setEnemyHpBar");
-        delay(1.8,"setFireballImg");
+        delay(1.1, "fireBallAnimation");
+        delay(1.1,"setEnemyHpBar");
+        delay(1.1,"setFireballImg");
         doEnemyAttack();
         if (isEnemyDead()) {
-            switchScene(event, "winEndScreen");
+            delay(2,"endGame");
+            delay(2,"killEnemy");
         }
         if (isMageDead()) {
-            switchScene(event, "loseEndScreen");
+            delay(4,"endGame");
+            delay(4,"killPlayer");
         }
     }
 
-    public void onHealButtonClicked(ActionEvent event) throws IOException {
+    public void onHealButtonClicked(){
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         special_btn.setLayoutX(10000);
@@ -161,11 +189,12 @@ public class magefightController implements MageGameProcess {
         delay(1, "fixHeal");
         doEnemyAttack();
         if (isMageDead()) {
-            switchScene(event, "loseEndScreen");
+            delay(4,"endGame");
+            delay(4,"killPlayer");
         }
     }
 
-    public void onSpecialButtonClicked(ActionEvent event) throws IOException{
+    public void onSpecialButtonClicked(){
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         special_btn.setLayoutX(10000);
@@ -176,9 +205,19 @@ public class magefightController implements MageGameProcess {
         delay(1,"setEnemyHpBar");
         doEnemyAttack();
         if (isEnemyDead()) {
+            delay(2,"endGame");
+            delay(2,"killEnemy");
+                    }
+        if (isMageDead()) {
+            delay(4,"endGame");
+            delay(4,"killPlayer");
+        }
+    }
+    public void onEndGameButtonClicked(ActionEvent event) throws IOException {
+        if(isEnemyDead()){
             switchScene(event, "winEndScreen");
         }
-        if (isMageDead()) {
+        else {
             switchScene(event, "loseEndScreen");
         }
     }

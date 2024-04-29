@@ -24,7 +24,7 @@ public interface TankGameProcess {
     Enemy enemy = new Enemy();
 
     Tank tank = new Tank();
-    default boolean isEnemyDead(){              //all methods for enemy functions
+    default boolean isEnemyDead(){
         return enemy.getHp() < 1;
     }
     default boolean enemyisAttacking(){

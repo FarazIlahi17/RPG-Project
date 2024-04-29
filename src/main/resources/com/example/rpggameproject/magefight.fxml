@@ -18,16 +18,16 @@
       <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/General Assets/enemy.png" />
       </ImageView>
-      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="101.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Mage Assets/mage.png" />
          </image></ImageView>
-      <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack">
+      <Button fx:id="attack_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="108.0" mnemonicParsing="false" onAction="#onAttackButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Attack" textFill="RED">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
       </Button>
-      <Button fx:id="heal_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="108.0" mnemonicParsing="false" onAction="#onHealButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Heal">
+      <Button fx:id="heal_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="108.0" mnemonicParsing="false" onAction="#onHealButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Heal" textFill="#00ff04">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font size="56.0" />
          </font>
       </Label>
-      <Button fx:id="special_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="625.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSpecialButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Special">
+      <Button fx:id="special_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="625.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSpecialButtonClicked" prefHeight="75.0" prefWidth="200.0" text="Special" textFill="#00cdff">
          <font>
             <Font name="Copperplate Gothic Bold" size="30.0" />
          </font>
@@ -65,5 +65,10 @@
             <Image url="@../../../images/Mage Assets/laser.gif" />
          </image>
       </ImageView>
+      <Button fx:id="endGame_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="10000.0" layoutY="200.0" mnemonicParsing="false" onAction="#onEndGameButtonClicked" opacity="0.0" prefHeight="175.0" prefWidth="450.0" text="END GAME" textFill="RED">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="53.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
