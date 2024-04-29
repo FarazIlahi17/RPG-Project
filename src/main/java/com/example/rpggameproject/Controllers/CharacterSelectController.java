@@ -14,15 +14,15 @@ public class CharacterSelectController implements AssassinGameProcess {
 
 
     @FXML
-    ImageView characterSelectBackground;
+    private ImageView characterSelectBackground;
     @FXML
-    ImageView knight_img;
+    private ImageView knight_img;
     @FXML
-    ImageView tank_img;
+    private ImageView tank_img;
     @FXML
-    ImageView assassin_img;
+    private ImageView assassin_img;
     @FXML
-    ImageView mage_img;
+    private ImageView mage_img;
 
 
     @FXML

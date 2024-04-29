@@ -2,6 +2,7 @@ package com.example.rpggameproject.Controllers.FightControllers;
 
 import com.example.rpggameproject.TankGameProcess;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -12,19 +13,31 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 
 public class tankfightController implements TankGameProcess {
-    public ImageView enemy_img;
-    public ImageView player_img;
-    public ImageView bullet;
-    public ImageView shield;
-    public ImageView white_flag;
-    public Button attack_btn;
-    public Button heal_btn;
+    @FXML
+    private ImageView enemy_img;
+    @FXML
+    private ImageView player_img;
+    @FXML
+    private ImageView bullet;
+    @FXML
+    private ImageView shield;
+    @FXML
+    private ImageView white_flag;
+    @FXML
+    private Button attack_btn;
+    @FXML
+    private Button heal_btn;
 
-    public Button endGame_btn;
-    public ProgressBar hpBar;
-    public ProgressBar enemyhpBar;
-    public Label playerHeal_label;
-    public Label enemyHeal_label;
+    @FXML
+    private Button endGame_btn;
+    @FXML
+    private ProgressBar hpBar;
+    @FXML
+    private ProgressBar enemyhpBar;
+    @FXML
+    private Label playerHeal_label;
+    @FXML
+    private Label enemyHeal_label;
 
 
     public void delay(double seconds, String fcn){

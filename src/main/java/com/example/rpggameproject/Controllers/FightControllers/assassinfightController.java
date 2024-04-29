@@ -3,6 +3,7 @@ package com.example.rpggameproject.Controllers.FightControllers;
 
 import com.example.rpggameproject.AssassinGameProcess;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -14,19 +15,31 @@ import java.util.concurrent.Executors;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 public class assassinfightController implements AssassinGameProcess {
-    public ImageView enemy_img;
-    public ImageView player_img;
-    public Button attack_btn;
-    public Button heal_btn;
+    @FXML
+    private ImageView enemy_img;
+    @FXML
+    private ImageView player_img;
+    @FXML
+    private Button attack_btn;
+    @FXML
+    private Button heal_btn;
+    @FXML
 
-    public Button endGame_btn;
-    public ProgressBar hpBar;
-    public ProgressBar enemyhpBar;
-    public Label crit_label;
-    public Label playerHeal_label;
-    public Label enemyHeal_label;
-    public Label enemyHp_label;
-    public Rectangle enemyHp_rect;
+    private Button endGame_btn;
+    @FXML
+    private ProgressBar hpBar;
+    @FXML
+    private ProgressBar enemyhpBar;
+    @FXML
+    private Label crit_label;
+    @FXML
+    private Label playerHeal_label;
+    @FXML
+    private Label enemyHeal_label;
+    @FXML
+    private Label enemyHp_label;
+    @FXML
+    private Rectangle enemyHp_rect;
 
     public void delay(double seconds, String fcn){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -73,7 +86,7 @@ public class assassinfightController implements AssassinGameProcess {
 
                     case "updateEnemyHpBar":
                         enemyhpBar.setProgress(setEnemyhpBar());
-                        enemyHp_label.setText("too much");
+//                        enemyHp_label.setText("too much");
                         break;
                     case "setEnemyImage":
                         enemy_img.setLayoutX(1100);

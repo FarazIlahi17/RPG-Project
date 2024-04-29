@@ -3,6 +3,7 @@ package com.example.rpggameproject.Controllers.FightControllers;
 
 import com.example.rpggameproject.MageGameProcess;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -13,20 +14,34 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 
 public class magefightController implements MageGameProcess {
-    public ImageView enemy_img;
-    public ImageView player_img;
-    public ImageView fireball;
-    public ImageView laser;
-    public Button attack_btn;
-    public Button heal_btn;
-    public Button special_btn;
-    public Button endGame_btn;
-    public ProgressBar hpBar;
-    public ProgressBar manaBar;
-    public ProgressBar enemyhpBar;
-    public Label special_label;
-    public Label playerHeal_label;
-    public Label enemyHeal_label;
+    @FXML
+    private ImageView enemy_img;
+    @FXML
+    private ImageView player_img;
+    @FXML
+    private ImageView fireball;
+    @FXML
+    private ImageView laser;
+    @FXML
+    private Button attack_btn;
+    @FXML
+    private Button heal_btn;
+    @FXML
+    private Button special_btn;
+    @FXML
+    private Button endGame_btn;
+    @FXML
+    private ProgressBar hpBar;
+    @FXML
+    private ProgressBar manaBar;
+    @FXML
+    private ProgressBar enemyhpBar;
+    @FXML
+    private Label special_label;
+    @FXML
+    private Label playerHeal_label;
+    @FXML
+    private Label enemyHeal_label;
 
 
     public void delay(double fraction, String fcn) {
