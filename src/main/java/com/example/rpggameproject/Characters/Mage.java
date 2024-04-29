@@ -11,7 +11,7 @@ public class Mage extends Character {
         this.name = "Mage";
         this.hp = 100;
         this.max_hp = this.hp;
-        this.basic_attack = 25;
+        this.basic_attack = 20;
         this.mana = 120;
         this.max_mana = this.mana;
         this.mana_consume = 15;

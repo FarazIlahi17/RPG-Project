@@ -31,58 +31,37 @@ public class tankfightController implements TankGameProcess {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                if(fcn.equals("bulletAnimation")){
-                    for(int i = 350; i <= 1200; i+=5){
-                        bullet.setLayoutX(i);
-                        try {
-                            Thread.sleep(5);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+                try {
+                    long milles = (long) (seconds * 1000);
+                    Thread.sleep(milles);
                 }
-                else {
-                    try {
-                        long milles = (long) (seconds * 1000);
-                        Thread.sleep(milles);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
 
                 switch(fcn) {
-                    case "doEnemyAttack":
-                        runEnemyTurn();
-                        if(enemyisAttacking()) {
-                            if(isBlocked()){
-                                delay(1,"block");
-                                delay(2,"resetBlock");
-                            }
-                            else {
-                                runEnemyDamage();
-                                animate("enemyGoForwardAnimation");
-                                animate("enemyAttackAnimationp1");
-                                animate("enemyAttackAnimationp2");
-                                animate("enemyGoBackAnimation");
-                                delay(3,"putBackEnemyHpBar");
-                                delay(3,"unRotateEnemy");
-                                if(isTankDead()){
-                                    return;
-                                }
-                                delay(3.5, "bringBackAttackButton");
-                                delay(3.5, "bringBackHealButton");
-                            }
+                    case "runEnemyAttack":
+                        animate("enemyGoForwardAnimation");
+                        animate("enemyAttackAnimationp1");
+                        animate("enemyAttackAnimationp2");
+                        animate("enemyGoBackAnimation");
+                        delay(3,"putBackEnemyHpBar");
+                        delay(3,"unRotateEnemy");
+                        if(isTankDead()){
+                            return;
                         }
-                        else {
-                            delay(1,"doEnemyHeal");
-                            delay(1,"updateEnemyHpBar");
-                            delay(2,"fixEnemyHeal");
-                            delay(2,"bringBackAttackButton");
-                            delay(2,"bringBackHealButton");
-                        }
+                        delay(3.5, "bringBackAttackButton");
+                        delay(3.5, "bringBackHealButton");
+                        break;
+                    case "runEnemyHeal":
+                        delay(1,"doEnemyHeal");
+                        delay(1,"updateEnemyHpBar");
+                        delay(2,"getRidOfEnemyHeal");
+                        delay(2,"bringBackAttackButton");
+                        delay(2,"bringBackHealButton");
                         break;
 
-                    case "setBulletImage":
+                    case "getRidOfBulletImage":
                         bullet.setOpacity(0);
                         break;
 
@@ -91,12 +70,11 @@ public class tankfightController implements TankGameProcess {
                         break;
                     case "doEnemyHeal":
                         enemyHeal_label.setOpacity(1);
-                        System.out.println("Enemy hp after is: " + setEnemyhpBar());
                         break;
                     case "fixHeal":
                         playerHeal_label.setOpacity(0);
                         break;
-                    case "fixEnemyHeal":
+                    case "getRidOfEnemyHeal":
                         enemyHeal_label.setOpacity(0);
                         break;
                     case "putBackEnemyHpBar":
@@ -253,14 +231,21 @@ public class tankfightController implements TankGameProcess {
 
         });
     }
-
-    public void doEnemyAttack(){
-        if(isEnemyDead()){
-            return;
+    public void enemyChoice(){
+        if((int)(Math.random() * 11) <= 7){
+            if(isBlocked()){
+                delay(1.2,"block");
+                delay(2.2,"resetBlock");
+                return;
+            }
+            runEnemyDamage();
+            delay(1.2,"runEnemyAttack");
         }
-        delay(1.2,"doEnemyAttack");
+        else {
+            runEnemyHeal();
+            delay(1.2,"runEnemyHeal");
+        }
     }
-
     public void onAttackButtonClicked(){
 
         bullet.setOpacity(1);
@@ -268,18 +253,18 @@ public class tankfightController implements TankGameProcess {
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
         basicAttack();
-        System.out.println("Enemy hp b4 is: " + setEnemyhpBar());
         animate("bulletAnimation");
         delay(1.1,"updateEnemyHpBar");
-        delay(1.1,"setBulletImage");
-        doEnemyAttack();
+        delay(1.1,"getRidOfBulletImage");
         if(isEnemyDead()){
-            delay(2,"endGame");
+            delay(3,"endGame");
             delay(2,"killEnemy");
+            return;
         }
+        enemyChoice();
         if(isTankDead()){
-            delay(4,"endGame");
-            delay(4,"killPlayer");
+            delay(6,"endGame");
+            delay(5,"killPlayer");
         }
 
     }
@@ -291,10 +276,10 @@ public class tankfightController implements TankGameProcess {
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
         delay(1, "fixHeal");
-        doEnemyAttack();
+        enemyChoice();
         if (isTankDead()) {
-            delay(4, "endGame");
-            delay(4, "killPlayer");
+            delay(5.5, "endGame");
+            delay(4.5, "killPlayer");
         }
     }
         public void onEndGameButtonClicked(ActionEvent event) throws IOException {

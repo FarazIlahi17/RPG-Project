@@ -26,21 +26,19 @@ public interface AssassinGameProcess {
     default boolean isEnemyDead(){              //all methods for enemy functions
         return enemy.getHp() < 1;
     }
-    default boolean enemyisAttacking(){
-        return enemy.getisAttacking();
-    }
+
     default double setEnemyhpBar(){
         return 1 - (enemy.getHp() / (double)enemy.getMax_hp());
     }
-    default void runEnemyTurn(){
-        if((int)(Math.random() * 11) <= 7){
-            assassin.takeDamage(enemy.getBasic_attack());
-            enemy.setAttacking(true);
-        }
-        else {
-            enemy.setheal();
-            enemy.setAttacking(false);
-        }
+    default void runEnemyHeal(){
+        enemy.setheal();
+    }
+
+    default String getEnemyHp(){
+        return enemy.toString();
+    }
+    default void runEnemyDamage(){
+        assassin.takeDamage(enemy.getBasic_attack());
     }
 
 

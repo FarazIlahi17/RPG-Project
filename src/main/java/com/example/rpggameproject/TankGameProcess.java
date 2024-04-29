@@ -27,20 +27,11 @@ public interface TankGameProcess {
     default boolean isEnemyDead(){
         return enemy.getHp() < 1;
     }
-    default boolean enemyisAttacking(){
-        return enemy.getisAttacking();
-    }
     default double setEnemyhpBar(){
         return 1 - (enemy.getHp() / (double)enemy.getMax_hp());
     }
-    default void runEnemyTurn(){
-        if((int)(Math.random() * 11) <= 7){
-            enemy.setAttacking(true);
-        }
-        else {
-            enemy.setheal();
-            enemy.setAttacking(false);
-        }
+    default void runEnemyHeal(){
+        enemy.setheal();
     }
     default void runEnemyDamage(){
         tank.takeDamage(enemy.getBasic_attack());

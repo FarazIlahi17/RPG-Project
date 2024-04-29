@@ -11,8 +11,8 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
-import static java.lang.Thread.sleep;
-
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 public class assassinfightController implements AssassinGameProcess {
     public ImageView enemy_img;
     public ImageView player_img;
@@ -25,18 +25,41 @@ public class assassinfightController implements AssassinGameProcess {
     public Label crit_label;
     public Label playerHeal_label;
     public Label enemyHeal_label;
+    public Label enemyHp_label;
+    public Rectangle enemyHp_rect;
 
-
-    public void delay(long seconds, String fcn){
+    public void delay(double seconds, String fcn){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(seconds * 1000);
-                } catch (InterruptedException e) {
+                    long milles = (long) (seconds * 1000);
+                    Thread.sleep(milles);
+                }
+                catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
                 switch(fcn) {
+                    case "runEnemyAttack":
+                        animate("enemyGoForwardAnimation");
+                        animate("enemyAttackAnimationp1");
+                        animate("enemyAttackAnimationp2");
+                        animate("enemyGoBackAnimation");
+                        delay(3,"putBackEnemyHpBar");
+                        delay(3,"unRotateEnemy");
+                        if(isAssassinDead()){
+                            return;
+                        }
+                        delay(3.5, "bringBackAttackButton");
+                        delay(3.5, "bringBackHealButton");
+                        break;
+                    case "runEnemyHeal":
+                        delay(1,"doEnemyHeal");
+                        delay(1,"updateEnemyHpBar");
+                        delay(2,"getRidOfEnemyHeal");
+                        delay(2,"bringBackAttackButton");
+                        delay(2,"bringBackHealButton");
+                        break;
                     case "setPlayerImage":
                         player_img.setLayoutX(100);
                         hpBar.setOpacity(1);
@@ -47,22 +70,29 @@ public class assassinfightController implements AssassinGameProcess {
                     case "fixHeal":
                         playerHeal_label.setOpacity(0);
                         break;
-                    case "doEnemyAttack":
-                        hpBar.setProgress(sethpBar());
-                        enemy_img.setLayoutX(300);
-                        enemyhpBar.setOpacity(0);
+
+                    case "updateEnemyHpBar":
+                        enemyhpBar.setProgress(setEnemyhpBar());
+                        enemyHp_label.setText("too much");
                         break;
                     case "setEnemyImage":
                         enemy_img.setLayoutX(1100);
                         enemyhpBar.setOpacity(1);
                         break;
-                    case "fixEnemyHeal":
-                        enemyHeal_label.setOpacity(0);
-                        break;
+
                     case "doEnemyHeal":
                         enemyHeal_label.setOpacity(1);
-                        enemyhpBar.setProgress(setEnemyhpBar());
                         break;
+                    case "getRidOfEnemyHeal":
+                        enemyHeal_label.setOpacity(0);
+                        break;
+                    case "putBackEnemyHpBar":
+                        enemyhpBar.setOpacity(1);
+                        break;
+                    case "unRotateEnemy":
+                        enemy_img.setRotate(0);
+                        break;
+
                     case "endGame":
                         attack_btn.setLayoutX(10000);
                         heal_btn.setLayoutX(10000);
@@ -76,6 +106,7 @@ public class assassinfightController implements AssassinGameProcess {
                         heal_btn.setLayoutX(900);
                         break;
                     case "killEnemy":
+                        enemy_img.setRotationAxis(Rotate.Z_AXIS);
                         enemy_img.setRotate(90);
                         enemy_img.setLayoutX(1200);
                         enemy_img.setLayoutY(400);
@@ -91,26 +122,93 @@ public class assassinfightController implements AssassinGameProcess {
             }
         });
     }
-    public void doEnemyAttack(){
-        if(isEnemyDead()){
-            return;
-        }
-        runEnemyTurn();
-        if(enemyisAttacking()) {
-            delay(2, "doEnemyAttack");
-            delay(3, "setEnemyImage");
-            if(isAssassinDead()){
-                return;
+    public void animate(String fcn){
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                switch (fcn){
+                    case "enemyGoForwardAnimation":
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        enemyhpBar.setOpacity(0);
+                        for(int i = 1100; i >= 300; i-=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyAttackAnimationp1":
+                        try {
+                            Thread.sleep(1750);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 300; i >= 150; i-=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyAttackAnimationp2":
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 150; i <= 300; i+=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case "enemyGoBackAnimation":
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        enemy_img.setRotate(180);
+                        hpBar.setProgress(sethpBar());
+                        for(int i = 300; i <= 1100; i+=10){
+                            enemy_img.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                }
             }
-            delay(3, "bringBackAttackButton");
-            delay(3, "bringBackHealButton");
 
+        });
+    }
+    public void enemyChoice(){
+        if((int)(Math.random() * 11) <= 7){
+            runEnemyDamage();
+            delay(1,"runEnemyAttack");
         }
         else {
-            delay(2,"doEnemyHeal");
-            delay(3,"fixEnemyHeal");
-            delay(3, "bringBackAttackButton");
-            delay(3, "bringBackHealButton");
+            runEnemyHeal();
+            delay(1.1,"runEnemyHeal");
         }
     }
 
@@ -127,14 +225,15 @@ public class assassinfightController implements AssassinGameProcess {
         }
         enemyhpBar.setProgress(setEnemyhpBar());
         delay(1,"setPlayerImage");
-        doEnemyAttack();
         if(isEnemyDead()){
-            delay(2,"endGame");
-            delay(2,"killEnemy");
-        }
-        if(isAssassinDead()){
             delay(3,"endGame");
-            delay(3,"killPlayer");
+            delay(2,"killEnemy");
+            return;
+        }
+        enemyChoice();
+        if(isAssassinDead()){
+            delay(5.2,"endGame");
+            delay(4.2,"killPlayer");
         }
     }
 
@@ -145,10 +244,11 @@ public class assassinfightController implements AssassinGameProcess {
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
         delay(1,"fixHeal");
-        doEnemyAttack();
+        delay(1,"doEnemyAttack");
+        enemyChoice();
         if(isAssassinDead()){
-            delay(3,"endGame");
-            delay(3,"killPlayer");        }
+            delay(5.4,"endGame");
+            delay(4.2,"killPlayer");        }
     }
     public void onEndGameButtonClicked(ActionEvent event) throws IOException {
         if(isEnemyDead()){

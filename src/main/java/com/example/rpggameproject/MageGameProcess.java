@@ -28,25 +28,16 @@ public interface MageGameProcess {
     default boolean isEnemyDead(){              //all methods for enemy functions
         return enemy.getHp() < 1;
     }
-    default boolean enemyisAttacking(){
-        return enemy.getisAttacking();
-    }
     default double setEnemyhpBar(){
         return 1 - (enemy.getHp() / (double)enemy.getMax_hp());
     }
-    default void runEnemyTurn(){
-        if((int)(Math.random() * 11) <= 7){
-            mage.takeDamage(enemy.getBasic_attack());
-            enemy.setAttacking(true);
-        }
-        else {
-            enemy.setheal();
-            enemy.setAttacking(false);
-            if(enemy.getHp() > enemy.getMax_hp()){
-                enemy.resetHp();
-            }
-        }
+    default void runEnemyHeal(){
+        enemy.setheal();
     }
+    default void runEnemyDamage(){
+        mage.takeDamage(enemy.getBasic_attack());
+    }
+
     default void basicAttack(){
         enemy.takeDamage(mage.getBasic_attack());
         mage.updateBar();

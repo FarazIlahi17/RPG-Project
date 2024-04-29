@@ -28,6 +28,11 @@ public abstract class Character{
         this.hp += (int)((1 - (current_hp / max)) * 20);
     }
 
+    @Override
+    public String toString() {
+        return this.hp + "/" + this.max_hp;
+    }
+
     public void takeDamage(int damage){
         this.hp -= damage;
     }

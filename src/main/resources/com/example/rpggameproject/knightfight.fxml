@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -15,8 +16,11 @@
             <Image url="@../../../images/General Assets/gameScreen.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1101.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/General Assets/enemy.png" />
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis>
       </ImageView>
       <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,7 +37,6 @@
          </font>
       </Button>
       <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="182.0" layoutY="392.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" rotate="180.0" />
-      <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1312.0" layoutY="283.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" rotate="180.0" />
       <Label fx:id="special_label" alignment="CENTER" layoutX="1275.0" layoutY="144.0" opacity="0.0" prefHeight="122.0" prefWidth="232.0" text="Special" textFill="#00ff28">
          <font>
             <Font size="60.0" />
@@ -60,5 +63,6 @@
             <Font name="Copperplate Gothic Bold" size="53.0" />
          </font>
       </Button>
+      <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1270.0" layoutY="290.0" prefHeight="20.0" prefWidth="220.0" progress="0.0" />
    </children>
 </AnchorPane>

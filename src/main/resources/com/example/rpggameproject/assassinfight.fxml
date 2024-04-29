@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.FightControllers.assassinfightController">
@@ -17,6 +19,9 @@
       </ImageView>
       <ImageView fx:id="enemy_img" fitHeight="422.0" fitWidth="453.0" layoutX="1100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/General Assets/enemy.png" />
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis>
       </ImageView>
       <ImageView fx:id="player_img" fitHeight="321.0" fitWidth="358.0" layoutX="100.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,7 +38,7 @@
          </font>
       </Button>
       <ProgressBar fx:id="hpBar" blendMode="GREEN" layoutX="221.0" layoutY="391.0" prefHeight="17.0" prefWidth="158.0" progress="0.0" rotate="180.0" />
-      <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1260.0" layoutY="280.0" prefHeight="20.0" prefWidth="220.0" progress="0.0" rotate="180.0" />
+      <ProgressBar fx:id="enemyhpBar" blendMode="RED" layoutX="1260.0" layoutY="276.0" prefHeight="34.0" prefWidth="220.0" progress="0.0" rotate="180.0" />
       <Label fx:id="crit_label" layoutX="1325.0" layoutY="170.0" opacity="0.0" prefHeight="91.0" prefWidth="96.0" text="Crit" textFill="#00ff28">
          <font>
             <Font size="56.0" />
@@ -54,5 +59,7 @@
             <Font name="Copperplate Gothic Bold" size="53.0" />
          </font>
       </Button>
+      <Rectangle fx:id="enemyHp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="1408.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Label fx:id="enemyHp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="1416.0" layoutY="290.0" prefHeight="20.0" prefWidth="63.0" />
    </children>
 </AnchorPane>
