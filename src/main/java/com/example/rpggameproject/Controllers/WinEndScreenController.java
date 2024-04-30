@@ -14,10 +14,14 @@ public class WinEndScreenController implements ControlEndGame {
     @FXML
     private Button endGame_btn;
     @FXML
+    private Button seeStats_btn;
+    @FXML
     private Label win_label;
     public void setEndGame_btn() {
-//        win_label.setText(getName());
         System.exit(0);
+    }
+    public void setSeeStats_btn() {
+        win_label.setText(getStatsWin());
     }
 
 

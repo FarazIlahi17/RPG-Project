@@ -137,8 +137,8 @@
             <Image url="@../../../images/Tank Assets/bullet.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="outOfBullets_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="580.0" layoutY="260.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Label fx:id="outOfBullets_label" alignment="CENTER" layoutX="612.0" layoutY="290.0" opacity="0.0" prefHeight="60.0" prefWidth="242.0" text="Out of Bullets">
+      <Rectangle fx:id="outOfBullets_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="10000.0" layoutY="260.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Label fx:id="outOfBullets_label" alignment="CENTER" layoutX="10000.0" layoutY="290.0" prefHeight="60.0" prefWidth="242.0" text="Out of Bullets">
          <font>
             <Font name="Eras Bold ITC" size="33.0" />
          </font>

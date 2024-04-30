@@ -1,7 +1,8 @@
 package com.example.rpggameproject.Characters;
 
-public abstract class Character{
+public abstract class Character{ ;
     protected String name;
+    protected String id;
     protected int hp;
     protected int max_hp;
     protected int basic_attack;
@@ -9,6 +10,12 @@ public abstract class Character{
 
     public String getName(){
         return this.name;
+    }
+    public String getId(){
+        return this.id;
+    }
+    public void setId(String i){
+        this.id = i;
     }
 
     public int getHp(){
@@ -21,6 +28,10 @@ public abstract class Character{
     public abstract int getBasic_attack();
 
     public abstract void updateBar();
+    @Override
+    public String toString() {
+        return (this.name + " is the ");
+    }
 
     public void setheal(){
         double current_hp = this.hp;
@@ -28,10 +39,6 @@ public abstract class Character{
         this.hp += (int)((1 - (current_hp / max)) * 20);
     }
 
-    @Override
-    public String toString() {
-        return "hp: " + this.hp + "/" + this.max_hp;
-    }
 
     public void takeDamage(int damage){
         this.hp -= damage;

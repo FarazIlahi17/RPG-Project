@@ -68,9 +68,5 @@
             <Font name="Copperplate Gothic Bold" size="53.0" />
          </font>
       </Button>
-      <Rectangle fx:id="enemyHp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10000.0" layoutY="287.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
-      <Label fx:id="enemyHp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="10000.0" layoutY="287.0" prefHeight="20.0" prefWidth="63.0" />
-      <Rectangle fx:id="hp_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10000.0" layoutY="402.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
-      <Label fx:id="hp_label" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="229.0" layoutY="402.0" prefHeight="20.0" prefWidth="63.0" />
    </children>
 </AnchorPane>

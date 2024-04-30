@@ -7,10 +7,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.StartController">
    <children>
-      <Button fx:id="start_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="700.0" layoutY="350.0" mnemonicParsing="false" onAction="#switchToCharSelectScene" prefHeight="100.0" prefWidth="200.0" text="Start Game">
+      <Button fx:id="start_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="740.0" layoutY="294.0" mnemonicParsing="false" onAction="#switchToCharSelectScene" prefHeight="40.0" prefWidth="120.0" text="Start Game">
          <font>
-            <Font size="30.0" />
+            <Font size="18.0" />
          </font></Button>
-      <TextField fx:id="enterName_texField" layoutX="700.0" layoutY="231.0" prefHeight="67.0" prefWidth="200.0" promptText="Enter Name" />
+      <TextField fx:id="enterName_texField" layoutX="615.0" layoutY="200.0" prefHeight="70.0" prefWidth="370.0" promptText="Enter Name">
+         <font>
+            <Font size="34.0" />
+         </font></TextField>
    </children>
 </AnchorPane>

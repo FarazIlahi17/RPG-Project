@@ -1,19 +1,25 @@
 package com.example.rpggameproject.Controllers;
 
-import com.example.rpggameproject.AssassinGameProcess;
-import javafx.event.ActionEvent;
+import com.example.rpggameproject.ControlEndGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
-import java.io.IOException;
 
-public class loseEndScreenController implements AssassinGameProcess {
+public class loseEndScreenController implements ControlEndGame {
     @FXML
     private Button endGame_btn;
-
-    public void setEndGame_btn(ActionEvent event) throws IOException {
+    @FXML
+    private Button seeStats_btn;
+    @FXML
+    private Label win_label;
+    public void setEndGame_btn() {
         System.exit(0);
     }
+    public void setSeeStats_btn() {
+        win_label.setText(getStatsLose());
+    }
+
 
 
 }

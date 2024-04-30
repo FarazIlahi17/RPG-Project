@@ -51,6 +51,7 @@ public interface AssassinGameProcess {
         else {
             enemy.takeDamage(assassin.getBasic_attack());
             assassin.updateBar();
+            System.out.println("crit chance is: " + assassin.getCrit_chance());
         }
     }
     default void resetisCrit(){

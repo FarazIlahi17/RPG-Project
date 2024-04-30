@@ -7,14 +7,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.WinEndScreenController">
    <children>
-      <Button fx:id="endGame_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="700.0" layoutY="350.0" mnemonicParsing="false" onAction="#setEndGame_btn" prefHeight="100.0" prefWidth="200.0" text="Quit">
+      <Button fx:id="endGame_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="1447.0" layoutY="683.0" mnemonicParsing="false" onAction="#setEndGame_btn" prefHeight="81.0" prefWidth="114.0" text="Quit">
          <font>
-            <Font size="57.0" />
+            <Font size="34.0" />
          </font></Button>
-      <Label fx:id="win_label" alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="85.0" prefHeight="159.0" prefWidth="474.0" text="You Win">
+      <Label fx:id="win_label" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="9.0" prefHeight="331.0" prefWidth="1573.0">
          <font>
             <Font size="75.0" />
          </font>
       </Label>
+      <Button fx:id="seeStats_btn" alignment="CENTER" contentDisplay="RIGHT" layoutX="671.0" layoutY="356.0" mnemonicParsing="false" onAction="#setSeeStats_btn" prefHeight="101.0" prefWidth="271.0" text="See Stats">
+         <font>
+            <Font size="47.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

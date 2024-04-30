@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 public class assassinfightController implements AssassinGameProcess {
     @FXML
@@ -38,6 +39,8 @@ public class assassinfightController implements AssassinGameProcess {
     private Label playerHeal_label;
     @FXML
     private Label enemyHeal_label;
+
+
 
 
     public void delay(double seconds, String fcn){
@@ -90,11 +93,6 @@ public class assassinfightController implements AssassinGameProcess {
                 case "updateEnemyHpBar":
                     enemyhpBar.setProgress(setEnemyhpBar());
                     break;
-                case "setEnemyImage":
-                    enemy_img.setLayoutX(1100);
-                    enemyhpBar.setOpacity(1);
-                    break;
-
                 case "doEnemyHeal":
                     enemyHeal_label.setOpacity(1);
                     break;
@@ -317,7 +315,6 @@ public class assassinfightController implements AssassinGameProcess {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    hpBar.setProgress(sethpBar());
                     for(int i = 150; i <= 300; i+=10){
                         enemy_img.setLayoutX(i);
                         try {
@@ -335,7 +332,6 @@ public class assassinfightController implements AssassinGameProcess {
                         throw new RuntimeException(e);
                     }
                     enemy_img.setRotate(180);
-
                     for(int i = 300; i <= 1100; i+=10){
                         enemy_img.setLayoutX(i);
                         try {
@@ -391,7 +387,7 @@ public class assassinfightController implements AssassinGameProcess {
         }
         else {
             waitTime_enemyTurn = 2.2;
-            waitTime_enemyDead = 4;
+            waitTime_enemyDead = 3.5;
             animate("assassinGoForwardAnimation");
             animate("assassinAttackAnimationp1");
             animate("assassinAttackAnimationp2");

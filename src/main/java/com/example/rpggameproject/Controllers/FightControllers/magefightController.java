@@ -310,10 +310,10 @@ public class magefightController implements MageGameProcess {
         delay(1,"laserAnimation");
         if (isEnemyDead()) {
             delay(3,"endGame");
-            delay(2,"killEnemy");
+            delay(2.5,"killEnemy");
             return;
         }
-        enemyChoice(1.5);
+        enemyChoice(1.85);
         isPlayerDead(3);
     }
     public void onEndGameButtonClicked(ActionEvent event) throws IOException {

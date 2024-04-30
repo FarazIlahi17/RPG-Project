@@ -178,6 +178,9 @@ public class tankfightController implements TankGameProcess {
                 case "endGame":
                     attack_btn.setLayoutX(10000);
                     heal_btn.setLayoutX(10000);
+                    back_btn.setLayoutX(10000);
+                    spamAttack_btn.setLayoutX(10000);
+                    useSpam_btn.setLayoutX(10000);
                     endGame_btn.setLayoutX(575);
                     endGame_btn.setOpacity(1);
                     break;
@@ -459,7 +462,6 @@ public class tankfightController implements TankGameProcess {
             useSpam_btn.setLayoutX(10000);
             back_btn.setLayoutX(250);
             spamAttack_btn.setLayoutX(630);
-            ImageView[] spamBulletsList = new ImageView[]{bullet1,bullet2,bullet3,bullet4,bullet5,bullet6,bullet7,bullet8,bullet9,bullet10};
         }
 
         public void onBackButtonClicked(){
@@ -474,11 +476,16 @@ public class tankfightController implements TankGameProcess {
         public void onSpamButtonClicked(){
             spamAttack();
             runSpamAnimation(bulletCount + "");
+            if(isEnemyDead()){
+                delay(3,"endGame");
+                delay(2,"killEnemy");
+                return;
+            }
             bulletCount++;
             if(bulletCount == 10){
                 spamAttack_btn.setLayoutX(10000);
-                outOfBullets_label.setOpacity(1);
-                outOfBullets_rect.setOpacity(1);
+                outOfBullets_label.setLayoutX(612);
+                outOfBullets_rect.setLayoutX(580);
             }
         }
         public void runSpamAnimation(String bulletNo){

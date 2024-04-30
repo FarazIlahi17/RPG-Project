@@ -21,14 +21,17 @@ public interface ControlEndGame {
         stage.show();
     }
     Assassin player = new Assassin();
-
-
     default void setName(String name){
         player.setName(name);
-        System.out.println("My name is: " + player.getName());
     }
-    default String getName(){
-        return player.getName();
+    default String getStatsWin(){
+        return (player.toString() + "winner!\nThe " + player.getId() + " was used to defeat the enemy.");
+    }
+    default String getStatsLose(){
+        return (player.toString() + "Loser!\nThe " + player.getId() + " was used to succumb to the enemy.");
+    }
+    default void setPlayer(String i){
+        player.setId(i);
     }
 
 
