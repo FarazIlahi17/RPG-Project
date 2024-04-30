@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rpggameproject.Controllers.FightControllers.tankfightController">
@@ -136,5 +137,11 @@
             <Image url="@../../../images/Tank Assets/bullet.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="outOfBullets_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="580.0" layoutY="260.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Label fx:id="outOfBullets_label" alignment="CENTER" layoutX="612.0" layoutY="290.0" opacity="0.0" prefHeight="60.0" prefWidth="242.0" text="Out of Bullets">
+         <font>
+            <Font name="Eras Bold ITC" size="33.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

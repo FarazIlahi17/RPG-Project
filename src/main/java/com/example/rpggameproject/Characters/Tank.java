@@ -9,7 +9,7 @@ public class Tank extends Character {
         this.hp = 252;
         this.max_hp = this.hp;
         this.basic_attack = 30;
-        this.block_chance = 100;
+        this.block_chance = 0;
         this.spamAttack = 10;
     }
     public int getBasic_attack(){

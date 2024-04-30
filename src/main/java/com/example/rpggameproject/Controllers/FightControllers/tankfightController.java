@@ -7,9 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 public class tankfightController implements TankGameProcess {
@@ -63,6 +65,11 @@ public class tankfightController implements TankGameProcess {
     private Label playerHeal_label;
     @FXML
     private Label enemyHeal_label;
+    @FXML
+    private Label outOfBullets_label;
+    @FXML
+    private Rectangle outOfBullets_rect;
+    static int bulletCount = 1;
 
 
     public void delay(double seconds, String fcn){
@@ -89,6 +96,8 @@ public class tankfightController implements TankGameProcess {
                     }
                     delay(3.5, "bringBackAttackButton");
                     delay(3.5, "bringBackHealButton");
+                    delay(3.5, "bringBackUseSpamButton");
+
                     break;
                 case "runEnemyHeal":
                     runEnemyHeal();
@@ -97,10 +106,41 @@ public class tankfightController implements TankGameProcess {
                     delay(2,"getRidOfEnemyHeal");
                     delay(2,"bringBackAttackButton");
                     delay(2,"bringBackHealButton");
+                    delay(2, "bringBackUseSpamButton");
                     break;
 
                 case "getRidOfBulletImage":
                     bullet.setOpacity(0);
+                    break;
+                case "getRidOfBullet1":
+                    bullet1.setOpacity(0);
+                    break;
+                case "getRidOfBullet2":
+                    bullet2.setOpacity(0);
+                    break;
+                case "getRidOfBullet3":
+                    bullet3.setOpacity(0);
+                    break;
+                case "getRidOfBullet4":
+                    bullet4.setOpacity(0);
+                    break;
+                case "getRidOfBullet5":
+                    bullet5.setOpacity(0);
+                    break;
+                case "getRidOfBullet6":
+                    bullet6.setOpacity(0);
+                    break;
+                case "getRidOfBullet7":
+                    bullet7.setOpacity(0);
+                    break;
+                case "getRidOfBullet8":
+                    bullet8.setOpacity(0);
+                    break;
+                case "getRidOfBullet9":
+                    bullet9.setOpacity(0);
+                    break;
+                case "getRidOfBullet10":
+                    bullet10.setOpacity(0);
                     break;
 
                 case "updateEnemyHpBar":
@@ -132,7 +172,9 @@ public class tankfightController implements TankGameProcess {
                 case "bringBackHealButton":
                     heal_btn.setLayoutX(900);
                     break;
-
+                case "bringBackUseSpamButton":
+                    useSpam_btn.setLayoutX(630);
+                    break;
                 case "endGame":
                     attack_btn.setLayoutX(10000);
                     heal_btn.setLayoutX(10000);
@@ -186,7 +228,7 @@ public class tankfightController implements TankGameProcess {
                     break;
                 case "blockAnimationp1":
                     try {
-                        Thread.sleep(1200);
+                        Thread.sleep(1800);
                     }
                     catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -205,7 +247,7 @@ public class tankfightController implements TankGameProcess {
                     break;
                 case "blockAnimationp2":
                     try {
-                        Thread.sleep(2200);
+                        Thread.sleep(2800);
                     }
                     catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -222,12 +264,14 @@ public class tankfightController implements TankGameProcess {
                     delay(.1,"getRidOfSheild");
                     delay(.5,"bringBackAttackButton");
                     delay(.5,"bringBackHealButton");
+                    delay(.5, "bringBackUseSpamButton");
+
 
                     break;
 
                 case "enemyBlockedAnimation1":
                     try {
-                        Thread.sleep(1200);
+                        Thread.sleep(1800);
                     }
                     catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -244,7 +288,7 @@ public class tankfightController implements TankGameProcess {
                     break;
                 case "enemyBlockedAnimation2":
                     try {
-                        Thread.sleep(2200);
+                        Thread.sleep(2800);
                     }
                     catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -285,7 +329,8 @@ public class tankfightController implements TankGameProcess {
                 case "enemyAttackAnimationp1":
                     try {
                         Thread.sleep(1750);
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     hpBar.setProgress(sethpBar());
@@ -371,6 +416,8 @@ public class tankfightController implements TankGameProcess {
         bullet.setLayoutX(350);
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
+        useSpam_btn.setLayoutX(10000);
+
         basicAttack();
         animate("bulletAnimation");
         delay(1.1,"updateEnemyHpBar");
@@ -388,6 +435,8 @@ public class tankfightController implements TankGameProcess {
     public void onHealButtonClicked(){
         attack_btn.setLayoutX(10000);
         heal_btn.setLayoutX(10000);
+        useSpam_btn.setLayoutX(10000);
+
         heal();
         hpBar.setProgress(sethpBar());
         playerHeal_label.setOpacity(1);
@@ -404,11 +453,13 @@ public class tankfightController implements TankGameProcess {
             }
         }
         public void onUseSpamButtonClicked(){
+            bulletCount = 1;
             attack_btn.setLayoutX(10000);
             heal_btn.setLayoutX(10000);
             useSpam_btn.setLayoutX(10000);
             back_btn.setLayoutX(250);
             spamAttack_btn.setLayoutX(630);
+            ImageView[] spamBulletsList = new ImageView[]{bullet1,bullet2,bullet3,bullet4,bullet5,bullet6,bullet7,bullet8,bullet9,bullet10};
         }
 
         public void onBackButtonClicked(){
@@ -417,9 +468,166 @@ public class tankfightController implements TankGameProcess {
             attack_btn.setLayoutX(350);
             heal_btn.setLayoutX(900);
             useSpam_btn.setLayoutX(630);
+            outOfBullets_rect.setLayoutX(10000);
+            outOfBullets_label.setLayoutX(10000);
         }
         public void onSpamButtonClicked(){
             spamAttack();
+            runSpamAnimation(bulletCount + "");
+            bulletCount++;
+            if(bulletCount == 10){
+                spamAttack_btn.setLayoutX(10000);
+                outOfBullets_label.setOpacity(1);
+                outOfBullets_rect.setOpacity(1);
+            }
+        }
+        public void runSpamAnimation(String bulletNo){
+            Executors.newSingleThreadExecutor().execute(() -> {
+                switch (bulletNo){
+                    case "1":
+                        bullet1.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet1.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet1");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "2":
+                        bullet2.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet2.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet2");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "3":
+                        bullet3.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet3.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet3");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "4":
+                        bullet4.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet4.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet4");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "5":
+                        bullet5.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet5.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet5");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "6":
+                        bullet6.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet6.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet6");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "7":
+                        bullet7.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet7.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet7");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "8":
+                        bullet8.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet8.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet8");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "9":
+                        bullet9.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet9.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet9");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                    case "10":
+                        bullet10.setOpacity(1);
+                        for(int i = 350; i <= 1200; i+=5){
+                            bullet10.setLayoutX(i);
+                            try {
+                                Thread.sleep(5);
+                            }
+                            catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            delay(1.3, "getRidOfBullet10");
+                            delay(1.3, "updateEnemyHpBar");
+                        }
+                        break;
+                }
+
+
+            });
         }
 }
 
